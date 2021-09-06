@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_recipes">
+
+    <fragment
+        android:id="@+id/navigation_recipes"
+        android:name="nesty.anzhy.matkonim.ui.home.HomeFragment"
+        android:label="@string/recipes"
+        tools:layout="@layout/fragment_recipes"/>
+
+    <fragment
+        android:id="@+id/navigation_favorite_recipes"
+        android:name="nesty.anzhy.matkonim.ui.dashboard.DashboardFragment"
+        android:label="@string/favorite_recipes"
+        tools:layout="@layout/fragment_favorite_recipes" />
+
+    <fragment
+        android:id="@+id/navigation_food_joke"
+        android:name="nesty.anzhy.matkonim.ui.notifications.NotificationsFragment"
+        android:label="@string/food_joke"
+        tools:layout="@layout/fragment_food_joke" />
+</navigation>
