@@ -1,10 +1,10 @@
-package nesty.anzhy.matkonim.ui.home
+package nesty.anzhy.matkonim.ui.recipes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class RecipesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

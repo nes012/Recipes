@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_recipes"
-        android:name="nesty.anzhy.matkonim.ui.home.HomeFragment"
+        android:name="nesty.anzhy.matkonim.ui.recipes.RecipesFragment"
         android:label="@string/recipes"
         tools:layout="@layout/fragment_recipes"/>
 
     <fragment
         android:id="@+id/navigation_favorite_recipes"
-        android:name="nesty.anzhy.matkonim.ui.dashboard.DashboardFragment"
+        android:name="nesty.anzhy.matkonim.ui.foodjoke.FoodJokeFragment"
         android:label="@string/favorite_recipes"
         tools:layout="@layout/fragment_favorite_recipes" />
 
     <fragment
         android:id="@+id/navigation_food_joke"
-        android:name="nesty.anzhy.matkonim.ui.notifications.NotificationsFragment"
+        android:name="nesty.anzhy.matkonim.ui.favoriterecipes.FavoriteRecipesFragment"
         android:label="@string/food_joke"
         tools:layout="@layout/fragment_food_joke" />
 </navigation>

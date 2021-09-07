@@ -1,10 +1,10 @@
-package nesty.anzhy.matkonim.ui.dashboard
+package nesty.anzhy.matkonim.ui.foodjoke
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class FoodJokeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
