@@ -24,6 +24,7 @@ class RecipesFragment : Fragment() {
             ViewModelProvider(this).get(RecipesViewModel::class.java)
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
+        binding.recyclerViewRecipes.showShimmer()
         return binding.root
     }
 
