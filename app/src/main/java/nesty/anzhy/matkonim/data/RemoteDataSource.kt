@@ -1,5 +1,6 @@
-package nesty.anzhy.matkonim
+package nesty.anzhy.matkonim.data
 
+import nesty.anzhy.matkonim.data.network.FoodRecipesApi
 import nesty.anzhy.matkonim.ui.models.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject

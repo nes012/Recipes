@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.ui
+package nesty.anzhy.matkonim.util
 
 class Constants {
 

@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim
+package nesty.anzhy.matkonim.data.network
 
 import nesty.anzhy.matkonim.ui.models.FoodRecipe
 import retrofit2.Response

@@ -3,8 +3,8 @@ package nesty.anzhy.matkonim.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import nesty.anzhy.matkonim.FoodRecipesApi
-import nesty.anzhy.matkonim.ui.Constants.Companion.BASE_URL
+import nesty.anzhy.matkonim.data.network.FoodRecipesApi
+import nesty.anzhy.matkonim.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,7 +47,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit):FoodRecipesApi{
+    fun provideApiService(retrofit: Retrofit): FoodRecipesApi {
         return retrofit.create(FoodRecipesApi::class.java)
     }
 }
