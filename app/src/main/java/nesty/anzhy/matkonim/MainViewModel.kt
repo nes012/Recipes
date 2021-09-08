@@ -9,14 +9,17 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.data.Repository
 import nesty.anzhy.matkonim.ui.models.FoodRecipe
 import nesty.anzhy.matkonim.util.NetworkResult
 import retrofit2.Response
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ):AndroidViewModel(application) {
