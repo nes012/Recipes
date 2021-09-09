@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class Result(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
+
     @SerializedName("cheap")
     val cheap: Boolean,
 

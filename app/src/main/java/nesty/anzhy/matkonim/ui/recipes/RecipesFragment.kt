@@ -16,6 +16,7 @@ import nesty.anzhy.matkonim.util.NetworkResult
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var recipesViewModel: RecipesViewModel
 
     private var _binding: FragmentRecipesBinding? = null
 
@@ -25,14 +26,23 @@ class RecipesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mainViewModel = ViewModelProvider(requireActivity())
+            .get(MainViewModel::class.java)
+        recipesViewModel = ViewModelProvider(requireActivity())
+            .get(RecipesViewModel::class.java)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        mainViewModel = ViewModelProvider(requireActivity())
-            .get(MainViewModel::class.java)
+
 
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
@@ -56,19 +66,6 @@ class RecipesFragment : Fragment() {
         binding.recyclerViewRecipes.hideShimmer()
     }
 
-    private fun applyQueries(): HashMap<String, String> {
-        val queries: HashMap<String, String> = HashMap()
-
-        queries["number"] = "50"
-        queries["apiKey"] = API_KEY
-        queries["type"] = "snack"
-        queries["diet"] = "vegan"
-        queries["addRecipeInformation"] = "true"
-        queries["fillIngredients"] = "true"
-
-        return queries
-    }
-
     private fun setupRecyclerView() {
         binding.recyclerViewRecipes.adapter = mAdapter
         binding.recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
@@ -76,7 +73,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        mainViewModel.getRecipes(applyQueries())
+        mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, {response->
             when(response){
                 is NetworkResult.Success->{
