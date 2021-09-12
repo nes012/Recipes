@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim
+package nesty.anzhy.matkonim.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
