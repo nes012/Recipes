@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(
     application: Application
 ):AndroidViewModel(application) {
 
-    /*
+
     /**ROOM DB */
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
 
@@ -32,7 +32,6 @@ class MainViewModel @Inject constructor(
             repository.local.insertRecipes(recipesEntity)
         }
 
-     */
 
 
     /**RETROFIT */
@@ -49,14 +48,12 @@ class MainViewModel @Inject constructor(
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
 
-                /*
+
                 //возможно удалить
                 val foodRecipe = recipesResponse.value!!.data
                 if(foodRecipe != null){
                     offlineCacheRecipes(foodRecipe)
                 }
-                 */
-
             } catch (e: Exception){
                 recipesResponse.value = NetworkResult.Error("Recipes not found")
             }
@@ -67,14 +64,12 @@ class MainViewModel @Inject constructor(
     }
 
     //возможно удалить
-    /*
+
     private fun offlineCacheRecipes(foodRecipe: FoodRecipe) {
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipes(recipesEntity)
     }
-     */
-
-
+    
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when{
