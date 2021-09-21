@@ -15,7 +15,6 @@ class RecipesAdapter:RecyclerView.Adapter<RecipesAdapter.VH>() {
 
     class VH(private val binding: RecipesItemLayoutBinding):
         RecyclerView.ViewHolder(binding.root) {
-
             fun bind(result: Result){
                 binding.result = result
                 binding.executePendingBindings()
@@ -43,10 +42,12 @@ class RecipesAdapter:RecyclerView.Adapter<RecipesAdapter.VH>() {
         return recipes.size
     }
 
+
     fun setData(newData: FoodRecipe){
         val recipesDiffUtil = RecipesDiffUtil(recipes, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         recipes = newData.results
         diffUtilResult.dispatchUpdatesTo(this)
     }
+
 }

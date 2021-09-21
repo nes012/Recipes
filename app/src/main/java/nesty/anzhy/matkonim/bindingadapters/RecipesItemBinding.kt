@@ -10,7 +10,6 @@ import nesty.anzhy.matkonim.R
 
 class RecipesItemBinding {
     companion object{
-
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
         fun loadImageFromUrl(imageView: ImageView, imageUrl:String){

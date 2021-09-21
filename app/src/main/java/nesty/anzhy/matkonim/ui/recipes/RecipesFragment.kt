@@ -1,6 +1,7 @@
 package nesty.anzhy.matkonim.ui.recipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -10,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import nesty.anzhy.matkonim.MainViewModel
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
-import nesty.anzhy.matkonim.util.Constants.Companion.API_KEY
 import nesty.anzhy.matkonim.util.NetworkResult
 
 @AndroidEntryPoint
@@ -20,7 +20,9 @@ class RecipesFragment : Fragment() {
 
     private var _binding: FragmentRecipesBinding? = null
 
-    private val mAdapter by lazy { RecipesAdapter() }
+    private val mAdapter by lazy {
+        RecipesAdapter()
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -41,16 +43,32 @@ class RecipesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
+
+
         setupRecyclerView()
+        //readDatabase()
         requestApiData()
 
         return binding.root
     }
+
+    /*
+    //возможно удалить
+    private fun readDatabase() {
+        mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            Log.d("RecipesFragment", "readDatabase called!")
+            if (database.isNotEmpty()) {
+                mAdapter.setData(database[0].foodRecipe)
+                hideShimmerEffect()
+            } else {
+                requestApiData()
+            }
+        })
+    }
+     */
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -73,20 +91,23 @@ class RecipesFragment : Fragment() {
     }
 
     private fun requestApiData() {
+       // Log.d("RecipesFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, {response->
-            when(response){
-                is NetworkResult.Success->{
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is NetworkResult.Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
                 }
-                is NetworkResult.Error->{
+                is NetworkResult.Error -> {
                     hideShimmerEffect()
-                    Toast.makeText(requireContext(),
-                    response.message.toString(),
-                    Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        response.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                is NetworkResult.Loading ->{
+                is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
             }

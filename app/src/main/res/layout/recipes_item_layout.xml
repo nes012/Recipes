@@ -7,7 +7,6 @@
         <variable
             name="result"
             type="nesty.anzhy.matkonim.ui.models.Result" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
