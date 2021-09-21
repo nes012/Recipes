@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.recipes.RecipesFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.todkars.shimmer.ShimmerRecyclerView
-        android:id="@+id/recyclerViewRecipes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical"
-        app:shimmer_recycler_item_count="3"
-        app:shimmer_recycler_layout="@layout/placeholder_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabRecipesFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="74dp"
-        android:clickable="true"
-        android:src="@drawable/ic_restaurant"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivErrorNoInternet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sad"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewRecipes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewRecipes"
-        app:layout_constraintVertical_bias="0.353" />
-
-    <TextView
-        android:id="@+id/tvErrorNoInternet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="No Internet Connection"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/ivErrorNoInternet"
-        app:layout_constraintStart_toStartOf="@+id/ivErrorNoInternet"
-        app:layout_constraintTop_toBottomOf="@+id/ivErrorNoInternet" />
+    <data>
+        <variable
+            name="mainViewModel"
+            type="nesty.anzhy.matkonim.MainViewModel" />
+    </data>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.recipes.RecipesFragment">
+
+
+        <com.todkars.shimmer.ShimmerRecyclerView
+            android:id="@+id/recyclerViewRecipes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:shimmer_recycler_item_count="3"
+            app:shimmer_recycler_layout="@layout/placeholder_layout" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRecipesFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="74dp"
+            android:clickable="true"
+            android:src="@drawable/ic_restaurant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivErrorNoInternet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sad"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerViewRecipes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerViewRecipes"
+            app:layout_constraintVertical_bias="0.353" />
+
+        <TextView
+            android:id="@+id/tvErrorNoInternet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="No Internet Connection"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/ivErrorNoInternet"
+            app:layout_constraintStart_toStartOf="@+id/ivErrorNoInternet"
+            app:layout_constraintTop_toBottomOf="@+id/ivErrorNoInternet" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
