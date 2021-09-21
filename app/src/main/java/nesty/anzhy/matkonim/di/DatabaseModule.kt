@@ -11,12 +11,12 @@ import nesty.anzhy.matkonim.data.database.RecipesDatabase
 import nesty.anzhy.matkonim.util.Constants.Companion.DATABASE_NAME
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Singleton
+    //we need provides annotation, because the room library is not our class, it is a third party
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context

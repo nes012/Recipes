@@ -13,6 +13,7 @@ import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkResult
 
+
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
@@ -35,7 +36,6 @@ class RecipesFragment : Fragment() {
             .get(MainViewModel::class.java)
         recipesViewModel = ViewModelProvider(requireActivity())
             .get(RecipesViewModel::class.java)
-
     }
 
     override fun onCreateView(
@@ -45,21 +45,20 @@ class RecipesFragment : Fragment() {
     ): View? {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
-
-
         setupRecyclerView()
-        //readDatabase()
-        requestApiData()
+        //requestApiData()
+        readDatabase()
 
         return binding.root
     }
 
-    /*
+
+
     //возможно удалить
     private fun readDatabase() {
         mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
-            Log.d("RecipesFragment", "readDatabase called!")
             if (database.isNotEmpty()) {
+                Log.d("RecipesFragment", "readDatabase called!")
                 mAdapter.setData(database[0].foodRecipe)
                 hideShimmerEffect()
             } else {
@@ -67,7 +66,6 @@ class RecipesFragment : Fragment() {
             }
         })
     }
-     */
 
 
     override fun onDestroyView() {
@@ -91,7 +89,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun requestApiData() {
-       // Log.d("RecipesFragment", "requestApiData called!")
+       Log.d("RecipesFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
