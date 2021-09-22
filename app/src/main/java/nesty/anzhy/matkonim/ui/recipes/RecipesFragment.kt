@@ -16,6 +16,7 @@ import nesty.anzhy.matkonim.MainViewModel
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkResult
+import nesty.anzhy.matkonim.util.observeOnce
 
 
 @AndroidEntryPoint
@@ -67,7 +68,7 @@ class RecipesFragment : Fragment() {
 //we're going to observe VM inside kotlin coroutine
      */
         lifecycleScope.launch{
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty()) {
                     Log.d("RecipesFragment", "readDatabase called!")
                     mAdapter.setData(database[0].foodRecipe)
