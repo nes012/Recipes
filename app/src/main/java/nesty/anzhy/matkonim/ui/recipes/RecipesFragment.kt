@@ -49,7 +49,11 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+    //! we should use viewLifecycleOwner instead this. binding.lifecycleOwner = viewLifecycleOwner Because view of fragment have smaller lifecycle than fragment
+     //binding.lifecycleOwner used for observing LiveData with data binding. Kind of android:text=@{viewModel.text} where val text:LiveData<String>. View will observe text changes at runtime.
 
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.mainViewModel = mainViewModel
         setupRecyclerView()
         //requestApiData()
         readDatabase()
@@ -132,5 +136,11 @@ class RecipesFragment : Fragment() {
                 }
             })
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //we are going to avoid the memory leaks. Whenever our recipes is destroyed, this binding will be set to null
+        _binding = null
     }
 }
