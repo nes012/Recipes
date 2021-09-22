@@ -1,6 +1,8 @@
-package nesty.anzhy.matkonim.data
+package nesty.anzhy.matkonim.data.repository
 
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import nesty.anzhy.matkonim.data.LocalDataSource
+import nesty.anzhy.matkonim.data.RemoteDataSource
 import javax.inject.Inject
 
 @ActivityRetainedScoped

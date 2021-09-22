@@ -6,9 +6,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkResult
@@ -54,6 +56,12 @@ class RecipesFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fabRecipesFragment.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
+        }
+    }
     /*
     //возможно удалить
     private fun readDatabase() {
