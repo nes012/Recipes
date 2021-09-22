@@ -15,6 +15,8 @@ class RecipesItemBinding {
         fun loadImageFromUrl(imageView: ImageView, imageUrl:String){
             imageView.load(imageUrl){
                 crossfade(600)
+                    //if we haven't internet connection this photo will upload with out cache information
+                error(R.drawable.error_loading)
             }
         }
 
