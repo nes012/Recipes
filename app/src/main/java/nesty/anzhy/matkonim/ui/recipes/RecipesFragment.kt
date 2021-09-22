@@ -6,9 +6,12 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
@@ -19,6 +22,8 @@ import nesty.anzhy.matkonim.util.NetworkResult
 class RecipesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
+
+    private val args by navArgs<RecipesFragmentArgs>()
 
     private var _binding: FragmentRecipesBinding? = null
 
@@ -50,8 +55,8 @@ class RecipesFragment : Fragment() {
 
 
         setupRecyclerView()
-        //readDatabase()
-        requestApiData()
+        readDatabase()
+        //requestApiData()
 
         return binding.root
     }
@@ -62,20 +67,22 @@ class RecipesFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
         }
     }
-    /*
-    //возможно удалить
+
+
     private fun readDatabase() {
-        mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
-            Log.d("RecipesFragment", "readDatabase called!")
-            if (database.isNotEmpty()) {
-                mAdapter.setData(database[0].foodRecipe)
-                hideShimmerEffect()
-            } else {
-                requestApiData()
-            }
-        })
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+                Log.d("RecipesFragment", "readDatabase called!")
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
+                    mAdapter.setData(database[0].foodRecipe)
+                    hideShimmerEffect()
+                } else {
+                    requestApiData()
+                }
+            })
+        }
     }
-     */
+
 
 
     override fun onDestroyView() {
@@ -109,6 +116,7 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
+                    loadDataFromCache()
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -121,4 +129,15 @@ class RecipesFragment : Fragment() {
             }
         })
     }
+
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, {database->
+                if (database.isNotEmpty()) {
+                    mAdapter.setData(database[0].foodRecipe)
+                }
+            })
+        }
+    }
+
 }
