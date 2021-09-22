@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_navigation_recipes_to_recipesBottomSheet"
             app:destination="@id/recipesBottomSheet" />
+        <argument
+            android:name="backFromBottomSheet"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 
     <fragment
@@ -30,7 +34,7 @@
         android:id="@+id/recipesBottomSheet"
         android:name="nesty.anzhy.matkonim.ui.recipes.bottomsheet.RecipesBottomSheet"
         android:label="recipes_bottom_sheet"
-        tools:layout="@layout/recipes_bottom_sheet" >
+        tools:layout="@layout/recipes_bottom_sheet">
         <action
             android:id="@+id/action_recipesBottomSheet_to_navigation_recipes"
             app:destination="@id/navigation_recipes" />
