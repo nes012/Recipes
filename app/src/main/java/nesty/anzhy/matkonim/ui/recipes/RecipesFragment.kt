@@ -17,6 +17,7 @@ import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkResult
+import nesty.anzhy.matkonim.util.observeOnce
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -52,13 +53,17 @@ class RecipesFragment : Fragment() {
     ): View? {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
-
-
         setupRecyclerView()
         readDatabase()
         //requestApiData()
 
         return binding.root
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerViewRecipes.adapter = mAdapter
+        binding.recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
+        showShimmerEffect()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,7 +76,7 @@ class RecipesFragment : Fragment() {
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
                 Log.d("RecipesFragment", "readDatabase called!")
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     mAdapter.setData(database[0].foodRecipe)
@@ -82,7 +87,6 @@ class RecipesFragment : Fragment() {
             })
         }
     }
-
 
 
     override fun onDestroyView() {
@@ -97,12 +101,6 @@ class RecipesFragment : Fragment() {
 
     private fun hideShimmerEffect() {
         binding.recyclerViewRecipes.hideShimmer()
-    }
-
-    private fun setupRecyclerView() {
-        binding.recyclerViewRecipes.adapter = mAdapter
-        binding.recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
-        showShimmerEffect()
     }
 
     private fun requestApiData() {

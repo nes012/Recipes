@@ -32,8 +32,6 @@ class MainViewModel @Inject constructor(
             repository.local.insertRecipes(recipesEntity)
         }
 
-
-
     /**RETROFIT */
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
@@ -47,7 +45,6 @@ class MainViewModel @Inject constructor(
             try{
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
-
 
                 //возможно удалить
                 val foodRecipe = recipesResponse.value!!.data
