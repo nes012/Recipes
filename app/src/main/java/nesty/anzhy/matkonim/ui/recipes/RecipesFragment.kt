@@ -3,6 +3,7 @@ package nesty.anzhy.matkonim.ui.recipes
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +23,7 @@ import nesty.anzhy.matkonim.util.NetworkResult
 import nesty.anzhy.matkonim.util.observeOnce
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment() {
+class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
 
@@ -59,8 +60,27 @@ class RecipesFragment : Fragment() {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
-        readDatabase()
+
+        //set menu for search
+        setHasOptionsMenu(true)
+
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+            //inside this observer we want to get the latest value from our DataStore. and set this value to onBackOnline view model
+            recipesViewModel.backOnline = it
+        })
+
         //requestApiData()
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    //this log is called every time when our onCreateView triggered
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                    readDatabase()
+                }
+        }
 
         return binding.root
     }
@@ -71,25 +91,32 @@ class RecipesFragment : Fragment() {
         showShimmerEffect()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.recipes_menu, menu)
+
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.fabRecipesFragment.setOnClickListener{
-            if(recipesViewModel.networkStatus) {
+        binding.fabRecipesFragment.setOnClickListener {
+            if (recipesViewModel.networkStatus) {
                 findNavController().navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
-            }else{
+            } else {
                 recipesViewModel.showNetworkStatus()
             }
-        }
-
-        lifecycleScope.launch{
-            networkListener = NetworkListener()
-            networkListener.checkNetworkAvailability(requireContext())
-                .collect { status->
-                    //this log is called every time when our onCreateView triggered
-                    Log.d("NetworkListener", status.toString())
-                    recipesViewModel.networkStatus = status
-                    recipesViewModel.showNetworkStatus()
-                }
         }
     }
 
@@ -118,12 +145,13 @@ class RecipesFragment : Fragment() {
         binding.recyclerViewRecipes.showShimmer()
 
     }
+
     private fun hideShimmerEffect() {
         binding.recyclerViewRecipes.hideShimmer()
     }
 
     private fun requestApiData() {
-       // Log.d("RecipesFragment", "requestApiData called!")
+        // Log.d("RecipesFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -149,12 +177,13 @@ class RecipesFragment : Fragment() {
 
     private fun loadDataFromCache() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, {database->
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty()) {
                     mAdapter.setData(database[0].foodRecipe)
                 }
             })
         }
     }
+
 
 }

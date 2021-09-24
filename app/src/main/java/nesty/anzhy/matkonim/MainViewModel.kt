@@ -46,7 +46,6 @@ class MainViewModel @Inject constructor(
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
 
-                //возможно удалить
                 val foodRecipe = recipesResponse.value!!.data
                 if(foodRecipe != null){
                     offlineCacheRecipes(foodRecipe)
@@ -60,13 +59,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    //возможно удалить
-
     private fun offlineCacheRecipes(foodRecipe: FoodRecipe) {
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipes(recipesEntity)
     }
-    
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when{
@@ -102,6 +98,5 @@ class MainViewModel @Inject constructor(
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)->true
             else->false
         }
-
     }
 }
