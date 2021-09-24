@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.data
+package nesty.anzhy.matkonim.data.network
 
 import nesty.anzhy.matkonim.data.network.FoodRecipesApi
 import nesty.anzhy.matkonim.ui.models.FoodRecipe

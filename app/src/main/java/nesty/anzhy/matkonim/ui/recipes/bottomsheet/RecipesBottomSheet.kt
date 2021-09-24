@@ -51,9 +51,11 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //if there is a new data in data store preference->we're going to update our chips with exact values
+        //whenever we open our bottom sheet, we're reading our values from data store.
         recipesViewModel.readMealAndDietType.asLiveData().observe(
             viewLifecycleOwner, { value ->
-                //our global variables will be changed
+                //after reading values from data store we stored those values inside two global variables (mealType and dietType).
+                //our global variables will be changed.
                 mealTypeChip = value.selectedMealType
                 dietTypeChip = value.selectedDietType
                 updateChip(value.selectedMealTypeId, binding.mealTypeChipGroup)
@@ -78,7 +80,7 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
             dietTypeChipId = checkedId
         }
 
-        //save newest values to data store
+        //only when we press apply button -> save newest values to data store
         binding.btnApply.setOnClickListener {
             //here we need to use our data store
             recipesViewModel.saveMealAndDietType(
@@ -98,6 +100,7 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
         if (chipId != 0) {
             try {
+                //in that case, we're applying selection to our chip group
                 chipGroup.findViewById<Chip>(chipId).isChecked = true
             } catch (e: Exception) {
                 Log.d("RecipesBottomSheet", e.message.toString())

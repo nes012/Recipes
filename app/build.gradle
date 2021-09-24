@@ -4,7 +4,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id("androidx.navigation.safeargs.kotlin")
-
 }
 
 android {
@@ -12,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "nesty.anzhy.matkonim"
-        minSdk 23
+        minSdk 24
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -94,11 +93,11 @@ dependencies {
     implementation "io.coil-kt:coil:1.3.0"
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-    implementation 'com.todkars:shimmer-recyclerview:0.4.0'
+    implementation 'com.todkars:shimmer-recyclerview:0.4.1'
 
     // Jsoup
     implementation 'org.jsoup:jsoup:1.13.1'

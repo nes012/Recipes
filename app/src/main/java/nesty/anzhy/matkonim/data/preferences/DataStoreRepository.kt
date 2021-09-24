@@ -22,8 +22,8 @@ import nesty.anzhy.matkonim.util.Constants.Companion.PREFERENCES_NAME
 import java.io.IOException
 import javax.inject.Inject
 
-//we will you this class instead Shared preferences. to save information about checked chips.
-//data store is running on background thread and on main thread like shared preferences.
+//we will use this class instead Shared preferences. to save information about checked chips.
+//data store is running on a background thread while  shared preferences on main thread.
 
 //we use retainedScope because datastore repository will be used inside recipes view model
 @ActivityRetainedScoped
@@ -40,6 +40,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(PREFERENCES_NAME)
 
+    //function for saving or storing our data inside data store preference
     suspend fun saveMealAndDietType(mealType: String, mealTypeId: Int, dietType: String, dietTypeId: Int) {
         //here we're going to use datastore to save values
         dataStore.edit { preferences->

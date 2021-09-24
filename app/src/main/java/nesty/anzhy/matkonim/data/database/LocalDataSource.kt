@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.data
+package nesty.anzhy.matkonim.data.database
 
 import kotlinx.coroutines.flow.Flow
 import nesty.anzhy.matkonim.data.database.RecipesDao

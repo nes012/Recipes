@@ -98,7 +98,6 @@ class RecipesFragment : Fragment() {
         binding.recyclerViewRecipes.showShimmer()
 
     }
-
     private fun hideShimmerEffect() {
         binding.recyclerViewRecipes.hideShimmer()
     }
