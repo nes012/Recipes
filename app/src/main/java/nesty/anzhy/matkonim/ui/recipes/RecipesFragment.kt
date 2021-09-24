@@ -11,11 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
+import nesty.anzhy.matkonim.util.NetworkListener
 import nesty.anzhy.matkonim.util.NetworkResult
 import nesty.anzhy.matkonim.util.observeOnce
 
@@ -35,6 +37,9 @@ class RecipesFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +74,22 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fabRecipesFragment.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
+            if(recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
+            }else{
+                recipesViewModel.showNetworkStatus()
+            }
+        }
+
+        lifecycleScope.launch{
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status->
+                    //this log is called every time when our onCreateView triggered
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                }
         }
     }
 
