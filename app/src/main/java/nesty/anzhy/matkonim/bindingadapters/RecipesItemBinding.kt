@@ -12,6 +12,7 @@ import coil.load
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 import java.lang.Exception
 
 class RecipesItemBinding {
@@ -76,6 +77,18 @@ class RecipesItemBinding {
                 catch (e: Exception){
                     Log.d("onRecipeClickListener", e.toString())
                 }
+            }
+        }
+
+        //we're going to parse text.
+        //we need to add nullable to second parameter string. cause it's sometimes can be nullable
+        @BindingAdapter("parseHtml")
+        @JvmStatic
+       fun parseHtml(textview: TextView, description: String?){
+            if(description!=null){
+                //with this line of code we have parse our html text
+                val desc = Jsoup.parse(description).text()
+                textview.text = desc
             }
         }
     }

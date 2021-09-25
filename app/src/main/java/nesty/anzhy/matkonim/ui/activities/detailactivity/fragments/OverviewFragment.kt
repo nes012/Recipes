@@ -10,6 +10,7 @@ import coil.load
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.databinding.FragmentOverviewBinding
 import nesty.anzhy.matkonim.models.Result
+import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
@@ -34,7 +35,12 @@ class OverviewFragment : Fragment() {
         binding.tvTitleOverview.text = myBundle?.title
         binding.tvLikesOverview.text = myBundle?.aggregateLikes.toString()
         binding.tvTimeOverView.text = myBundle?.readyInMinutes.toString()
-        binding.tvSummaryOverview.text = myBundle?.summary
+       // binding.tvSummaryOverview.text = myBundle?.summary
+        //we're going to parse html with jsoup library
+        myBundle?.summary.let {
+            val summary = Jsoup.parse(it).text()
+            binding.tvSummaryOverview.text = summary
+        }
 
         if(myBundle?.vegetarian == true){
             binding.ivVegetarianOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
