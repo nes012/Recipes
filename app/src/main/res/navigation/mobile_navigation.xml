@@ -44,7 +44,7 @@
     </dialog>
     <activity
         android:id="@+id/detailsActivity"
-        android:name="nesty.anzhy.matkonim.ui.activities.DetailsActivity"
+        android:name="nesty.anzhy.matkonim.ui.activities.detailactivity.DetailsActivity"
         android:label="Details"
         tools:layout="@layout/activity_details" >
         <argument

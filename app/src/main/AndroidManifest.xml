@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Matkonim">
         <activity
-            android:name=".ui.activities.DetailsActivity"
+            android:name=".ui.activities.detailactivity.DetailsActivity"
             android:exported="true"
             android:theme="@style/DetailsActivityStyle"
             android:label="Details"/>
