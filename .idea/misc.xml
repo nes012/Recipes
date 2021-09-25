@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1546875" />
+        <entry key="app/src/main/res/font/bubblegum_sans.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_food_joke.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.1" />
         <entry key="app/src/main/res/layout/placeholder_layout.xml" value="0.21467391304347827" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.19384057971014493" />
