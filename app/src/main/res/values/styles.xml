@@ -14,12 +14,12 @@
         <item name="checkedIconTint">@color/chip_text_color</item>
     </style>
 
-    <style name="DetailsActivityStyle" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="DetailsActivityStyle" parent="Theme.Design.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">

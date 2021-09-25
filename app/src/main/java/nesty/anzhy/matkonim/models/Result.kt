@@ -1,8 +1,12 @@
-package nesty.anzhy.matkonim.ui.models
+package nesty.anzhy.matkonim.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Result(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,
@@ -15,7 +19,7 @@ data class Result(
     val dairyFree: Boolean,
 
     @SerializedName("extendedIngredients")
-    val extendedIngredients: List<ExtendedIngredient>,
+    val extendedIngredients: @RawValue List<ExtendedIngredient>,
 
     @SerializedName("glutenFree")
     val glutenFree: Boolean,
@@ -47,4 +51,4 @@ data class Result(
     val veryHealthy: Boolean,
 
 
-)
+    ) : Parcelable

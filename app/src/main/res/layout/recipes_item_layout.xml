@@ -7,11 +7,12 @@
 
         <variable
             name="result"
-            type="nesty.anzhy.matkonim.ui.models.Result" />
+            type="nesty.anzhy.matkonim.models.Result" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipesItemLayout"
+        onRecipeClickListener="@{result}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

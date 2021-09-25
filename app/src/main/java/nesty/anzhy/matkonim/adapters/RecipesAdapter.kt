@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nesty.anzhy.matkonim.databinding.RecipesItemLayoutBinding
-import nesty.anzhy.matkonim.ui.models.FoodRecipe
-import nesty.anzhy.matkonim.ui.models.Result
+import nesty.anzhy.matkonim.models.FoodRecipe
+import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.util.RecipesDiffUtil
 
 class RecipesAdapter:RecyclerView.Adapter<RecipesAdapter.VH>() {

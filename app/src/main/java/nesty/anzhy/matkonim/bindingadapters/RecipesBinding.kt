@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import nesty.anzhy.matkonim.data.database.RecipesEntity
-import nesty.anzhy.matkonim.ui.models.FoodRecipe
+import nesty.anzhy.matkonim.models.FoodRecipe
 import nesty.anzhy.matkonim.util.NetworkResult
 
 //binding class for our recipes fragment.
