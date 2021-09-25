@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.ui.models
+package nesty.anzhy.matkonim.models
 
 
 import com.google.gson.annotations.SerializedName

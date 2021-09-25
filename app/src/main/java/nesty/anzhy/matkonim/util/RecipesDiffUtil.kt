@@ -1,7 +1,7 @@
 package nesty.anzhy.matkonim.util
 
 import androidx.recyclerview.widget.DiffUtil
-import nesty.anzhy.matkonim.ui.models.Result
+import nesty.anzhy.matkonim.models.Result
 
 class RecipesDiffUtil(
     private val oldList: List<Result>,

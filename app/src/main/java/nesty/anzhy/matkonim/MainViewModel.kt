@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.data.database.RecipesEntity
 import nesty.anzhy.matkonim.data.repository.Repository
-import nesty.anzhy.matkonim.ui.models.FoodRecipe
+import nesty.anzhy.matkonim.models.FoodRecipe
 import nesty.anzhy.matkonim.util.NetworkResult
 import retrofit2.Response
 import javax.inject.Inject
