@@ -13,6 +13,7 @@
         android:layout_height="250dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
@@ -34,11 +35,13 @@
         android:id="@+id/ivTimeOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tint="@color/white"
+        android:layout_marginBottom="3dp"
         android:src="@drawable/ic_time"
         app:layout_constraintBottom_toTopOf="@+id/tvTimeOverView"
         app:layout_constraintEnd_toEndOf="@+id/tvTimeOverView"
-        app:layout_constraintStart_toStartOf="@+id/tvTimeOverView" />
+        app:layout_constraintStart_toStartOf="@+id/tvTimeOverView"
+        app:layout_constraintTop_toTopOf="@+id/ivLikesOverview"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tvLikesOverview"
@@ -47,17 +50,19 @@
         android:layout_marginEnd="12dp"
         android:text="100"
         app:layout_constraintBottom_toBottomOf="@+id/tvTimeOverView"
-        app:layout_constraintEnd_toStartOf="@+id/tvTimeOverView" />
+        app:layout_constraintEnd_toStartOf="@+id/tvTimeOverView"
+        app:layout_constraintTop_toTopOf="@+id/tvTimeOverView" />
 
     <ImageView
         android:id="@+id/ivLikesOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
         android:src="@drawable/ic_favorite"
-        app:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/tvLikesOverview"
         app:layout_constraintEnd_toEndOf="@+id/tvLikesOverview"
-        app:layout_constraintStart_toStartOf="@+id/tvLikesOverview" />
+        app:layout_constraintStart_toStartOf="@+id/tvLikesOverview"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tvTitleOverview"

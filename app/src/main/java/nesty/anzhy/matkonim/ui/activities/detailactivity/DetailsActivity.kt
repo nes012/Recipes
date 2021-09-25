@@ -20,6 +20,7 @@ import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsF
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
 
 class DetailsActivity : AppCompatActivity() {
+    //when we open details activity we initialize pagerAdapter
 
     private val args by navArgs<DetailsActivityArgs>()
 
