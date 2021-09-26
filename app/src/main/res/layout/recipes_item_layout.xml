@@ -89,7 +89,6 @@
                     app:layout_constraintEnd_toEndOf="@+id/tvLikes"
                     app:layout_constraintStart_toStartOf="@+id/tvDescription"
                     app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/ic_favorite"
                     app:tint="@color/red" />
 
@@ -143,8 +142,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:layout_marginEnd="73dp"
                     android:text="Vegan"
                     android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvTime"
                     app:layout_constraintTop_toBottomOf="@+id/ivVegan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
