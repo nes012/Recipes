@@ -12,5 +12,6 @@ class FavoritesEntity(
     // favorite recipes inside our favorite recipes table
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    //we will need to convert it. because our result in JSON format
     var result: Result
 )
