@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.data.database
+package nesty.anzhy.matkonim.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

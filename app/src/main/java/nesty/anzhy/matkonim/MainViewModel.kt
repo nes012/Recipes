@@ -9,7 +9,7 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.data.database.RecipesEntity
+import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
 import nesty.anzhy.matkonim.data.repository.Repository
 import nesty.anzhy.matkonim.models.FoodRecipe
 import nesty.anzhy.matkonim.util.NetworkResult
