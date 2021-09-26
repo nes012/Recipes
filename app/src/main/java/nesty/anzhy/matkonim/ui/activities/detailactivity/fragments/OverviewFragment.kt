@@ -10,17 +10,13 @@ import coil.load
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.databinding.FragmentOverviewBinding
 import nesty.anzhy.matkonim.models.Result
+import nesty.anzhy.matkonim.util.Constants.Companion.RECIPE_RESULT_KEY
 import org.jsoup.Jsoup
 
 class OverviewFragment : Fragment() {
 
     private var _binding: FragmentOverviewBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +25,7 @@ class OverviewFragment : Fragment() {
         _binding = FragmentOverviewBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable("recipeBundle")
+        val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
 
         binding.imageViewOverview.load(myBundle?.image)
         binding.tvTitleOverview.text = myBundle?.title
@@ -69,5 +65,7 @@ class OverviewFragment : Fragment() {
 
         return binding.root
     }
+
+
 
 }

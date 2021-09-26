@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.databinding.IngredientsItemLayoutBinding
 import nesty.anzhy.matkonim.models.ExtendedIngredient
 import nesty.anzhy.matkonim.util.Constants.Companion.BASE_IMAGE_URL
@@ -24,7 +25,12 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.ivIngredient.load(BASE_IMAGE_URL + ingredientList[position].image)
+        //load image with coin library
+        holder.binding.ivIngredient.load(BASE_IMAGE_URL + ingredientList[position].image){
+            crossfade(600)
+            error(R.drawable.error_loading)
+        }
+
         holder.binding.tvIngredientName.text = ingredientList[position].name.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(
                 Locale.getDefault()
