@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.util.Constants
 
+//also we need to modify recipes type converter because we are going to use Result class in this entity.
 @Entity(tableName = Constants.FAVORITES_RECIPES_TABLE)
 class FavoritesEntity(
     //we need to annotate autoGenerate true because we're going to have multiple
