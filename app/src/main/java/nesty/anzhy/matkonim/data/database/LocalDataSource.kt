@@ -1,8 +1,7 @@
 package nesty.anzhy.matkonim.data.database
 
 import kotlinx.coroutines.flow.Flow
-import nesty.anzhy.matkonim.data.database.RecipesDao
-import nesty.anzhy.matkonim.data.database.RecipesEntity
+import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
