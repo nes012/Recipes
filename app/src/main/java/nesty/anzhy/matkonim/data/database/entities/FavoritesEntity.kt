@@ -5,11 +5,13 @@ import androidx.room.PrimaryKey
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.util.Constants
 
+//also we need to modify recipes type converter because we are going to use Result class in this entity.
 @Entity(tableName = Constants.FAVORITES_RECIPES_TABLE)
 class FavoritesEntity(
     //we need to annotate autoGenerate true because we're going to have multiple
     // favorite recipes inside our favorite recipes table
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    //we will need to convert it. because our result in JSON format
     var result: Result
 )
