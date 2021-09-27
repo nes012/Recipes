@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="favoriteEntity"
+            type="nesty.anzhy.matkonim.data.database.entities.FavoritesEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardViewRecipes"
@@ -29,6 +37,7 @@
                     android:layout_width="190dp"
                     android:layout_height="190dp"
                     android:scaleType="centerCrop"
+                    loadImageFromUrl="@{favoriteEntity.result.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +54,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/bubblegum_sans"
                     android:maxLines="2"
-                    android:text="@{result.title}"
+                    android:text="@{favoriteEntity.result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -61,6 +70,7 @@
                     android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:maxLines="3"
+                    parseHtml="@{favoriteEntity.result.summary}"
                     android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/tvTitleFavorite"
                     app:layout_constraintStart_toStartOf="@+id/tvTitleFavorite"
@@ -72,18 +82,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
+                    android:src="@drawable/ic_favorite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tvLikesFavorite"
                     app:layout_constraintStart_toStartOf="@+id/tvDescriptionFavorite"
                     app:layout_constraintTop_toBottomOf="@+id/tvDescriptionFavorite"
-                    app:srcCompat="@drawable/ic_favorite"
                     app:tint="@color/red" />
 
                 <TextView
                     android:id="@+id/tvLikesFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
+                    android:text="@{String.valueOf(favoriteEntity.result.aggregateLikes)}"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     app:layout_constraintStart_toStartOf="@+id/tvDescriptionFavorite"
@@ -104,8 +114,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="100"
                     android:textAlignment="center"
+                    android:text="@{String.valueOf(favoriteEntity.result.readyInMinutes)}"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toEndOf="@+id/tvLikesFavorite"
                     app:layout_constraintTop_toBottomOf="@+id/ivTimeFavorite" />
@@ -118,6 +128,7 @@
                     app:layout_constraintStart_toStartOf="@+id/tvVeganFavorite"
                     app:layout_constraintTop_toTopOf="@+id/ivTimeFavorite"
                     app:srcCompat="@drawable/ic_vegan"
+                    applyVeganColor="@{favoriteEntity.result.vegan}"
                     app:tint="@color/yellow" />
 
                 <TextView
@@ -126,6 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="73dp"
+                    applyVeganColor="@{favoriteEntity.result.vegan}"
                     android:text="Vegan"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -135,4 +147,5 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

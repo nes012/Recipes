@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1546875" />
+        <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.2523076923076923" />
         <entry key="app/src/main/res/font/bubblegum_sans.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />

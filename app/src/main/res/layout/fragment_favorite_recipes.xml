@@ -24,8 +24,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:alpha="0.5"
-        android:src="@drawable/cooking_book"
+        android:src="@drawable/cooking_book_big_size"
         android:visibility="invisible"
+        app:tint="@color/darkGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewFavoriteRecipes"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,11 +39,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:alpha="0.5"
-        android:text="No Favorite Recipes"
+        android:text="@string/no_favorite_recipes"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/ivNoData"
         app:layout_constraintStart_toStartOf="@+id/ivNoData"
         app:layout_constraintTop_toBottomOf="@+id/ivNoData"
-        tools:visibility="invisible" />
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

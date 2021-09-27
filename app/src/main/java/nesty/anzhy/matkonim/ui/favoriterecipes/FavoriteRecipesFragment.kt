@@ -6,26 +6,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
+import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.adapters.FavoriteRecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentFavoriteRecipesBinding
 
+@AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
 
-    private lateinit var favoriteRecipesFragmentViewModel: FavoriteRecipesFragmentViewModel
+    private lateinit var mainViewModel: MainViewModel
+
     private var _binding: FragmentFavoriteRecipesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favoriteRecipesFragmentViewModel =
-            ViewModelProvider(this).get(FavoriteRecipesFragmentViewModel::class.java)
+        mainViewModel =  ViewModelProvider(requireActivity())
+            .get(MainViewModel::class.java)
+
+
+        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, {  database->
+            if (database.isNotEmpty()) {
+                mAdapter.setData(database)
+            }
+            else{
+                binding.ivNoData.visibility = View.VISIBLE
+                binding.tvNoData.visibility = View.VISIBLE
+            }
+        })
 
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
+
+        setupRecyclerView(binding.recyclerViewFavoriteRecipes)
+
 
         return binding.root
     }
@@ -33,5 +56,10 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        recyclerView.adapter = mAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 }

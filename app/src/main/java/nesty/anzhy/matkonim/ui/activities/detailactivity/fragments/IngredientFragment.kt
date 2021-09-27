@@ -35,7 +35,7 @@ class IngredientFragment : Fragment() {
         return binding.root
     }
 
-    fun setupRecyclerView(){
+    private fun setupRecyclerView(){
         binding.recyclerViewIngredients.adapter = mAdapter
         binding.recyclerViewIngredients.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewIngredients.setHasFixedSize(true)

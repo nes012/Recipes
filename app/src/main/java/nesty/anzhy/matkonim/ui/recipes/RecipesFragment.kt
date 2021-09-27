@@ -71,7 +71,9 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         })
 
         //requestApiData()
-        lifecycleScope.launch {
+        //instead launch need to use launchWhenStarted.
+        //we need to collect values from immutable stateFlow object only when lifecycle state has started
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
