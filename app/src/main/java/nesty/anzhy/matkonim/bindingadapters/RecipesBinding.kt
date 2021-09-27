@@ -3,6 +3,7 @@ package nesty.anzhy.matkonim.bindingadapters
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
 import nesty.anzhy.matkonim.models.FoodRecipe
@@ -16,43 +17,23 @@ class RecipesBinding {
          //require all to true - we want to make our compiler display a warning or an error
          @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
          @JvmStatic
-         fun errorImageViewVisibility(
+         fun handleReadDataError(
              //actual view on which we are going to use custom binding adapter
-             imageView: ImageView,
+             view: View,
              //our api response
              apiResponse: NetworkResult<FoodRecipe>?,
              database: List<RecipesEntity>?
          ){
-             if(apiResponse is NetworkResult.Error && database.isNullOrEmpty()){
-                 imageView.visibility = View.VISIBLE
-             }
-             else if (apiResponse is NetworkResult.Loading){
-                 imageView.visibility = View.INVISIBLE
-             }
-             else if(apiResponse is NetworkResult.Success){
-                 imageView.visibility = View.INVISIBLE
+             when(view){
+                 is ImageView ->{
+                     view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                 }
+                 is TextView ->{
+                     view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                     view.text = apiResponse?.message.toString()
+                 }
              }
          }
 
-         @BindingAdapter("readApiResponse2", "readDatabase2", requireAll = true)
-         @JvmStatic
-         fun errorTextViewVisibility(
-             //actual view on which we are going to use custom binding adapter
-             textView: TextView,
-             //our api response
-             apiResponse: NetworkResult<FoodRecipe>?,
-             database: List<RecipesEntity>?
-         ){
-             if(apiResponse is NetworkResult.Error && database.isNullOrEmpty()){
-                 textView.visibility = View.VISIBLE
-                 textView.text = apiResponse.message.toString()
-             }
-             else if (apiResponse is NetworkResult.Loading){
-                 textView.visibility = View.INVISIBLE
-             }
-             else if(apiResponse is NetworkResult.Success){
-                 textView.visibility = View.INVISIBLE
-             }
-         }
      }
 }
