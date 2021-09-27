@@ -33,8 +33,15 @@ class FavoriteRecipesFragment : Fragment() {
     ): View? {
         mainViewModel =  ViewModelProvider(requireActivity())
             .get(MainViewModel::class.java)
+        _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
 
+        binding.lifecycleOwner = this
+        binding.mAdapter = mAdapter
+        binding.mainViewModel = mainViewModel
 
+        //we don't need this code because we added FavoriteRecipesBinding to layout.
+        //mainViewModel and adapter inside layout.
+        /*
         mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner, {  database->
             if (database.isNotEmpty()) {
                 mAdapter.setData(database)
@@ -44,11 +51,8 @@ class FavoriteRecipesFragment : Fragment() {
                 binding.tvNoData.visibility = View.VISIBLE
             }
         })
-
-        _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
-
+         */
         setupRecyclerView(binding.recyclerViewFavoriteRecipes)
-
 
         return binding.root
     }
