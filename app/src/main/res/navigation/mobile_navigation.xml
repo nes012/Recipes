@@ -29,7 +29,9 @@
         tools:layout="@layout/recipes_bottom_sheet">
         <action
             android:id="@+id/action_recipesBottomSheet_to_navigation_recipes"
-            app:destination="@id/navigation_recipes" />
+            app:destination="@id/navigation_recipes"
+            app:popUpTo="@id/navigation_recipes"
+            app:popUpToInclusive="true" />
     </dialog>
     <activity
         android:id="@+id/detailsActivity"
@@ -44,7 +46,11 @@
         android:id="@+id/navigation_favorite_recipes"
         android:name="nesty.anzhy.matkonim.ui.favoriterecipes.FavoriteRecipesFragment"
         android:label="fragment_favorite_recipes"
-        tools:layout="@layout/fragment_favorite_recipes" />
+        tools:layout="@layout/fragment_favorite_recipes" >
+        <action
+            android:id="@+id/action_navigation_favorite_recipes_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_food_joke"

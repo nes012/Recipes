@@ -2,17 +2,20 @@ package nesty.anzhy.matkonim.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.databinding.FavoriteRecipesItemLayoutBinding
+import nesty.anzhy.matkonim.ui.favoriterecipes.FavoriteRecipesFragment
+import nesty.anzhy.matkonim.ui.favoriterecipes.FavoriteRecipesFragmentDirections
 import nesty.anzhy.matkonim.util.RecipesDiffUtil
 
 class FavoriteRecipesAdapter: RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>() {
 
     private var favoriteRecipes = emptyList<FavoritesEntity>()
 
-    class MyViewHolder(private val binding: FavoriteRecipesItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
+    class MyViewHolder(val binding: FavoriteRecipesItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(favoritesEntity: FavoritesEntity){
             //we are binding favorite entity from layout with our parameter.
             binding.favoriteEntity = favoritesEntity
@@ -36,6 +39,12 @@ class FavoriteRecipesAdapter: RecyclerView.Adapter<FavoriteRecipesAdapter.MyView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val selectedRecipe = favoriteRecipes[position]
         holder.bind(selectedRecipe)
+
+        holder.binding.favoriteRecipesItemLayout.setOnClickListener {
+            val action =
+                FavoriteRecipesFragmentDirections.actionNavigationFavoriteRecipesToDetailsActivity(selectedRecipe.result)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int = favoriteRecipes.size
