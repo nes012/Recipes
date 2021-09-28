@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/bubblegum_sans</item>
+        <item>@font/caveat_brush</item>
+        <item>@font/lemon</item>
         <item>@font/mclaren</item>
     </array>
 </resources>
