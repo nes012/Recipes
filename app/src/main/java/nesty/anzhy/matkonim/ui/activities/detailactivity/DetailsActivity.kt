@@ -20,7 +20,6 @@ import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
-import java.lang.Exception
 
 //it's important to add this annotations like in MainActivity..otherwise our app will crash
 @AndroidEntryPoint
@@ -34,6 +33,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private var recipeSaved = false
     private var savedRecipeId = 0
+
 
     private lateinit var menuItem: MenuItem
 
@@ -77,7 +77,6 @@ class DetailsActivity : AppCompatActivity() {
             tab.text = titles[position]
         }.attach()
 
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -96,8 +95,6 @@ class DetailsActivity : AppCompatActivity() {
                         changeItemMenuColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.id
                         recipeSaved = true
-                    } else {
-                        changeItemMenuColor(menuItem, R.color.white)
                     }
                 }
             } catch (e: Exception) {
@@ -113,8 +110,8 @@ class DetailsActivity : AppCompatActivity() {
         } else if (item.itemId == R.id.save_to_favorites_menu && !recipeSaved) {
             //this function should have only one parameter and that is menu item
             saveToFavorites(item)
-        } else if(item.itemId == R.id.save_to_favorites_menu && recipeSaved){
-            removeFomFavorites(item)
+        } else if (item.itemId == R.id.save_to_favorites_menu && recipeSaved) {
+            removeFromFavorites(item)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -124,7 +121,7 @@ class DetailsActivity : AppCompatActivity() {
             0,
             //result of our selected recipe
             args.result
-                //then we need to call insert favorite recipes
+            //then we need to call insert favorite recipes
         )
         mainViewModel.insertFavoriteRecipe(favoritesEntity)
         //after insert recipe to fav db we need to change color of star icon
@@ -137,7 +134,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-    private fun removeFomFavorites(item: MenuItem){
+    private fun removeFromFavorites(item: MenuItem) {
         val favoritesEntity = FavoritesEntity(
             savedRecipeId,
             args.result
@@ -162,7 +159,8 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        changeItemMenuColor(menuItem, R.color.yellow)
+        changeItemMenuColor(menuItem, R.color.white)
     }
+
 }
 

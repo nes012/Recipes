@@ -1,10 +1,10 @@
 package nesty.anzhy.matkonim.ui.activities.detailactivity.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import coil.load
 import nesty.anzhy.matkonim.R
@@ -26,6 +26,7 @@ class OverviewFragment : Fragment() {
 
         val args = arguments
         val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
+
 
         binding.imageViewOverview.load(myBundle?.image)
         binding.tvTitleOverview.text = myBundle?.title
@@ -65,7 +66,6 @@ class OverviewFragment : Fragment() {
 
         return binding.root
     }
-
 
 
 }

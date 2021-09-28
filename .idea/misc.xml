@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1546875" />
+        <entry key="../../.gradle/caches/transforms-3/2bd8cd76e49b31dc091d5cad52f44e91/transformed/material-1.5.0-alpha02/res/layout/design_text_input_end_icon.xml" value="0.12135416666666667" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.2523076923076923" />
+        <entry key="app/src/main/res/drawable/ic_star.xml" value="0.25625" />
         <entry key="app/src/main/res/drawable/splash_activity.xml" value="0.15104166666666666" />
         <entry key="app/src/main/res/font/bubblegum_sans.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.25" />
