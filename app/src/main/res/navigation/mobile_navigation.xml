@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/navigation_favorite_recipes"
         android:name="nesty.anzhy.matkonim.ui.favoriterecipes.FavoriteRecipesFragment"
-        android:label="fragment_favorite_recipes"
+        android:label="Favorite Recipes"
         tools:layout="@layout/fragment_favorite_recipes" >
         <action
             android:id="@+id/action_navigation_favorite_recipes_to_detailsActivity"
@@ -55,6 +55,6 @@
     <fragment
         android:id="@+id/navigation_food_joke"
         android:name="nesty.anzhy.matkonim.ui.foodjoke.FoodJokeFragment"
-        android:label="fragment_food_joke"
+        android:label="Food Joke"
         tools:layout="@layout/fragment_food_joke" />
 </navigation>
