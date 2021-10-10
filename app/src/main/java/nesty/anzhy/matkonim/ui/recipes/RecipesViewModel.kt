@@ -7,12 +7,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.data.DataStoreRepository
+import nesty.anzhy.matkonim.util.Constants.Companion.API_KEY
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_DIET_TYPE
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_RECIPES_NUMBER
@@ -33,7 +32,7 @@ class RecipesViewModel @Inject constructor(
 
     private var mealType = DEFAULT_MEAL_TYPE
     private var dietType = DEFAULT_DIET_TYPE
-    private var context = application
+        //private var context = application
 
     var networkStatus = false
     var backOnline = false
@@ -66,7 +65,7 @@ class RecipesViewModel @Inject constructor(
         }
 
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
-        queries[QUERY_API_KEY] = context.getString(R.string.api_key)
+        queries[QUERY_API_KEY] = API_KEY
         queries[QUERY_TYPE] = mealType
         queries[QUERY_DIET] = dietType
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
@@ -79,7 +78,7 @@ class RecipesViewModel @Inject constructor(
         val queries: HashMap<String, String> = HashMap()
         queries[QUERY_SEARCH] = searchQuery
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
-        queries[QUERY_API_KEY] = context.getString(R.string.api_key)
+        queries[QUERY_API_KEY] = API_KEY
         queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
         queries[QUERY_FILL_INGREDIENTS] = "true"
 

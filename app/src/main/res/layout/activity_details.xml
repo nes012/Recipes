@@ -23,6 +23,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
+            app:tabTextAppearance="@style/TabLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|enterAlways"
