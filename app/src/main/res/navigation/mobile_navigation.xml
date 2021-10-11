@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_recipes">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_recipes"
@@ -53,8 +53,49 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_food_joke"
-        android:name="nesty.anzhy.matkonim.ui.foodjoke.FoodJokeFragment"
-        android:label="Food Joke"
-        tools:layout="@layout/fragment_food_joke" />
+        android:id="@+id/navigation_home"
+        android:name="nesty.anzhy.matkonim.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="nesty.anzhy.matkonim.ui.useractivity.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="nesty.anzhy.matkonim.ui.home.ResetPasswordFragment"
+        android:label="Reset Password"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="nesty.anzhy.matkonim.ui.home.SignInFragment">
+        <action
+            android:id="@+id/action_signInFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="nesty.anzhy.matkonim.ui.home.SignUpFragment">
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

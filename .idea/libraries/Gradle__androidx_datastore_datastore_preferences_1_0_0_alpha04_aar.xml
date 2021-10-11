@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.datastore:datastore-preferences:1.0.0-alpha04@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/04972120fafac80498d870996f44e077/transformed/jetified-datastore-preferences-1.0.0-alpha04/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/04972120fafac80498d870996f44e077/transformed/jetified-datastore-preferences-1.0.0-alpha04/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/04972120fafac80498d870996f44e077/transformed/jetified-datastore-preferences-1.0.0-alpha04/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8deccbc9bdcaada05a571557db466046/transformed/jetified-datastore-preferences-1.0.0-alpha04/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b85917fb81614378b018a21dac1cbfe0/transformed/jetified-datastore-preferences-1.0.0-alpha04/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b85917fb81614378b018a21dac1cbfe0/transformed/jetified-datastore-preferences-1.0.0-alpha04/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b85917fb81614378b018a21dac1cbfe0/transformed/jetified-datastore-preferences-1.0.0-alpha04/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
