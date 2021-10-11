@@ -63,7 +63,7 @@
     </fragment>
     <activity
         android:id="@+id/splashActivity"
-        android:name="nesty.anzhy.matkonim.ui.useractivity.SplashActivity"
+        android:name="nesty.anzhy.matkonim.ui.splashactivity.SplashActivity"
         android:label="activity_splash"
         tools:layout="@layout/activity_splash" />
     <fragment

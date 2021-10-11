@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.ui.useractivity
+package nesty.anzhy.matkonim.ui.splashactivity
 
 import android.content.Intent
 import android.os.Bundle
