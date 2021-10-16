@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import nesty.anzhy.matkonim.MainViewModel
@@ -20,8 +20,8 @@ import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
+import nesty.anzhy.matkonim.util.Constants.Companion.RECIPE_RESULT_KEY
 
-//it's important to add this annotations like in MainActivity..otherwise our app will crash
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     //when we open details activity we initialize pagerAdapter
@@ -34,12 +34,12 @@ class DetailsActivity : AppCompatActivity() {
     private var recipeSaved = false
     private var savedRecipeId = 0
 
-
     private lateinit var menuItem: MenuItem
 
     private lateinit var binding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,6 +48,9 @@ class DetailsActivity : AppCompatActivity() {
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+        val resultBundle = Bundle()
+        resultBundle.putParcelable(RECIPE_RESULT_KEY, args.result)
 
         val fragments = ArrayList<Fragment>()
         fragments.add(OverviewFragment())
@@ -60,15 +63,13 @@ class DetailsActivity : AppCompatActivity() {
         titles.add("Instructions")
 
 
-        val resultBundle = Bundle()
-        resultBundle.putParcelable("recipeBundle", args.result)
-
         val pagerAdapter = PagerAdapter(
             resultBundle,
             fragments,
             this
         )
 
+        binding.viewPager2.isUserInputEnabled = false
         binding.viewPager2.apply {
             adapter = pagerAdapter
         }
@@ -76,15 +77,25 @@ class DetailsActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = titles[position]
         }.attach()
-
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        //
-        menuItem = menu?.findItem(R.id.save_to_favorites_menu)!!
+        menuItem = menu!!.findItem(R.id.save_to_favorites_menu)
         checkSavedRecipes(menuItem)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        } else if (item.itemId == R.id.save_to_favorites_menu && !recipeSaved) {
+            saveToFavorites(item)
+        } else if (item.itemId == R.id.save_to_favorites_menu && recipeSaved) {
+            removeFromFavorites(item)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun checkSavedRecipes(menuItem: MenuItem) {
@@ -92,7 +103,7 @@ class DetailsActivity : AppCompatActivity() {
             try {
                 for (savedRecipe in favoritesEntity) {
                     if (savedRecipe.result.recipeId == args.result.recipeId) {
-                        changeItemMenuColor(menuItem, R.color.yellow)
+                        changeMenuItemColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.id
                         recipeSaved = true
                     }
@@ -103,64 +114,46 @@ class DetailsActivity : AppCompatActivity() {
         })
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-        } else if (item.itemId == R.id.save_to_favorites_menu && !recipeSaved) {
-            //this function should have only one parameter and that is menu item
-            saveToFavorites(item)
-        } else if (item.itemId == R.id.save_to_favorites_menu && recipeSaved) {
-            removeFromFavorites(item)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun saveToFavorites(item: MenuItem) {
-        val favoritesEntity = FavoritesEntity(
-            0,
-            //result of our selected recipe
-            args.result
-            //then we need to call insert favorite recipes
-        )
+        val favoritesEntity =
+            FavoritesEntity(
+                0,
+                args.result
+            )
         mainViewModel.insertFavoriteRecipe(favoritesEntity)
-        //after insert recipe to fav db we need to change color of star icon
-        changeItemMenuColor(item, R.color.yellow)
-
-        showToast("Recipe saved")
-
+        changeMenuItemColor(item, R.color.yellow)
+        showSnackBar("Recipe saved.")
         recipeSaved = true
-
     }
-
 
     private fun removeFromFavorites(item: MenuItem) {
-        val favoritesEntity = FavoritesEntity(
-            savedRecipeId,
-            args.result
-        )
+        val favoritesEntity =
+            FavoritesEntity(
+                savedRecipeId,
+                args.result
+            )
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
-        changeItemMenuColor(item, R.color.white)
-        showToast("Removed from Favorites")
+        changeMenuItemColor(item, R.color.white)
+        showSnackBar("Removed from Favorites.")
         recipeSaved = false
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(
-            this@DetailsActivity,
+    private fun showSnackBar(message: String) {
+        Snackbar.make(
+            binding.detailsLayout,
             message,
-            Toast.LENGTH_SHORT
-        ).show()
+            Snackbar.LENGTH_SHORT
+        ).setAction("Okay") {}
+            .show()
     }
 
-    private fun changeItemMenuColor(item: MenuItem, color: Int) {
+    private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon.setTint(ContextCompat.getColor(this, color))
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
-        changeItemMenuColor(menuItem, R.color.white)
+        changeMenuItemColor(menuItem, R.color.white)
     }
-
 }
-

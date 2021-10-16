@@ -53,12 +53,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         return binding?.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
-
     private fun registerObservers() {
         viewModel.currentUser.observe(viewLifecycleOwner, { user ->
             user?.let {
@@ -109,4 +103,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             }
         }
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

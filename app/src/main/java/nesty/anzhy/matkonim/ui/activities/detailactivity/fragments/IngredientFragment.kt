@@ -28,9 +28,9 @@ class IngredientFragment : Fragment() {
         val args = arguments
         val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
 
-        myBundle?.extendedIngredients?.let { mAdapter.setData(it) }
-
         setupRecyclerView()
+
+        myBundle?.extendedIngredients?.let { mAdapter.setData(it) }
 
         return binding.root
     }
@@ -39,5 +39,10 @@ class IngredientFragment : Fragment() {
         binding.recyclerViewIngredients.adapter = mAdapter
         binding.recyclerViewIngredients.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewIngredients.setHasFixedSize(true)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

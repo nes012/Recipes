@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import coil.load
 import nesty.anzhy.matkonim.R
+import nesty.anzhy.matkonim.bindingadapters.RecipesItemBinding
 import nesty.anzhy.matkonim.databinding.FragmentOverviewBinding
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.util.Constants.Companion.RECIPE_RESULT_KEY
@@ -25,47 +28,35 @@ class OverviewFragment : Fragment() {
         _binding = FragmentOverviewBinding.inflate(inflater, container, false)
 
         val args = arguments
-        val myBundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
+        val myBundle: Result = args!!.getParcelable<Result>(RECIPE_RESULT_KEY) as Result
 
+        binding.imageViewOverview.load(myBundle.image)
+        binding.tvTitleOverview.text = myBundle.title
+        binding.tvLikesOverview.text = myBundle.aggregateLikes.toString()
+        binding.tvTimeOverView.text = myBundle.readyInMinutes.toString()
 
-        binding.imageViewOverview.load(myBundle?.image)
-        binding.tvTitleOverview.text = myBundle?.title
-        binding.tvLikesOverview.text = myBundle?.aggregateLikes.toString()
-        binding.tvTimeOverView.text = myBundle?.readyInMinutes.toString()
-       // binding.tvSummaryOverview.text = myBundle?.summary
-        //we're going to parse html with jsoup library
-        myBundle?.summary.let {
-            val summary = Jsoup.parse(it).text()
-            binding.tvSummaryOverview.text = summary
-        }
+        RecipesItemBinding.parseHtml(binding.tvSummaryOverview, myBundle.summary)
 
-        if(myBundle?.vegetarian == true){
-            binding.ivVegetarianOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvVegetarianOverview.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
-        if(myBundle?.cheap == true){
-            binding.ivCheapOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvCheapOverview.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
-        if(myBundle?.dairyFree == true){
-            binding.ivDairyFreeOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvDairyFreeOverview.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
-        if(myBundle?.glutenFree == true){
-            binding.ivGlutenFreeOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvGlutenFreeOverView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
-        if(myBundle?.veryHealthy == true){
-            binding.ivHealthyOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvHealthyOverview.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
-        if(myBundle?.vegan == true){
-            binding.ivVeganOverview.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.tvVeganOverview.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-        }
+        updateColors(myBundle.vegetarian, binding.tvVegetarianOverview, binding.ivVegetarianOverview)
+        updateColors(myBundle.vegan, binding.tvVeganOverview, binding.ivVeganOverview)
+        updateColors(myBundle.cheap, binding.tvCheapOverview, binding.ivCheapOverview)
+        updateColors(myBundle.dairyFree, binding.tvDairyFreeOverview, binding.ivDairyFreeOverview)
+        updateColors(myBundle.glutenFree, binding.tvGlutenFreeOverView, binding.ivGlutenFreeOverview)
+        updateColors(myBundle.veryHealthy, binding.tvHealthyOverview, binding.ivHealthyOverview)
 
         return binding.root
     }
 
+    private fun updateColors(stateIsOn: Boolean, textView: TextView, imageView: ImageView) {
+        if (stateIsOn) {
+            imageView.setColorFilter(ContextCompat.getColor(requireContext(),R.color.green))
+            textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

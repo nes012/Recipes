@@ -51,8 +51,6 @@ class RecipesItemBinding {
             }
         }
 
-
-
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
         fun onRecipeClickListener(recipeItemLayout: ConstraintLayout, result: Result){

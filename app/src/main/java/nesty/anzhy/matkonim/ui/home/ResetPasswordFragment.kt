@@ -72,4 +72,9 @@ class ResetPasswordFragment : Fragment(R.layout.fragment_reset_password) {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
