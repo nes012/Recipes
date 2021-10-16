@@ -36,8 +36,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         RecipesAdapter()
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -93,7 +91,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.recipes_menu, menu)
 
@@ -102,21 +99,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
     }
-
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(query!=null) {
             searchApiData(query)
         }
         return true
     }
-
     override fun onQueryTextChange(newText: String?): Boolean {
         return true
         //we're not going to use this function, because this function will be called whenever we type a character inside our search widget
         //it's a bad to our performance
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fabRecipesFragment.setOnClickListener {
@@ -127,26 +120,18 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
     }
-
-
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
                 Log.d("RecipesFragment", "readDatabase called!")
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
-                    mAdapter.setData(database[0].foodRecipe)
+                    mAdapter.setData(database.first().foodRecipe)
                     hideShimmerEffect()
                 } else {
                     requestApiData()
                 }
             })
         }
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun showShimmerEffect() {
@@ -166,6 +151,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
+                    recipesViewModel.saveMealAndDietType()
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
@@ -213,11 +199,15 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty()) {
-                    mAdapter.setData(database[0].foodRecipe)
+                    mAdapter.setData(database.first().foodRecipe)
                 }
             })
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

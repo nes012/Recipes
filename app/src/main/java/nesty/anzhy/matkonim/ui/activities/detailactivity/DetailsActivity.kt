@@ -17,11 +17,11 @@ import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.PagerAdapter
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
+import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
 
-//it's important to add this annotations like in MainActivity..otherwise our app will crash
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     //when we open details activity we initialize pagerAdapter
@@ -44,6 +44,8 @@ class DetailsActivity : AppCompatActivity() {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val ar = args.result
+
         setSupportActionBar(binding.toolBar)
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -61,7 +63,8 @@ class DetailsActivity : AppCompatActivity() {
 
 
         val resultBundle = Bundle()
-        resultBundle.putParcelable("recipeBundle", args.result)
+        val res: Result = args.result
+        resultBundle.putParcelable("recipeBundle", res)
 
         val pagerAdapter = PagerAdapter(
             resultBundle,
