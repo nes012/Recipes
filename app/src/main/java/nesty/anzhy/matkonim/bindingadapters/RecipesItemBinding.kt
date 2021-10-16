@@ -59,7 +59,8 @@ class RecipesItemBinding {
             Log.d("onRecipeClickListener", "CALLED")
             recipeItemLayout.setOnClickListener{
                 try{
-                    val action = RecipesFragmentDirections.actionNavigationRecipesToDetailsActivity(result)
+                    val action =
+                        RecipesFragmentDirections.actionNavigationRecipesToDetailsActivity(result)
                     recipeItemLayout.findNavController().navigate(action)
                 }
                 catch (e: Exception){

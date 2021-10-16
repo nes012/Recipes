@@ -5,10 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import nesty.anzhy.matkonim.data.network.FoodRecipesApi
-import nesty.anzhy.matkonim.data.firebase.AuthRepository
-import nesty.anzhy.matkonim.data.firebase.BaseAuthRepository
-import nesty.anzhy.matkonim.data.firebase.BaseAuthenticator
-import nesty.anzhy.matkonim.data.firebase.FirebaseAuthenticator
+
 import nesty.anzhy.matkonim.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -58,19 +55,4 @@ object NetworkModule {
     }
 
 
-    //anytime we need an authenticator Dagger will provide a Firebase authenticator.
-    //in future if you want to swap out Firebase authentication for your own custom authenticator
-    //you will simply come and swap here.
-    @Singleton
-    @Provides
-    fun provideAuthenticator() : BaseAuthenticator {
-        return  FirebaseAuthenticator()
-    }
-    //this just takes the same idea as the authenticator. If we create another repository class
-    //we can simply just swap here
-    @Singleton
-    @Provides
-    fun provideRepository() : BaseAuthRepository {
-        return AuthRepository(provideAuthenticator())
-    }
 }
