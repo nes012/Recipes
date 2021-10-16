@@ -17,18 +17,15 @@ import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.PagerAdapter
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
-import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
-    //when we open details activity we initialize pagerAdapter
 
     private val args by navArgs<DetailsActivityArgs>()
 
-    //we will call this vm in save to fav function
     private val mainViewModel: MainViewModel by viewModels() //lazy initialize
 
     private var recipeSaved = false
@@ -43,8 +40,6 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val ar = args.result
 
         setSupportActionBar(binding.toolBar)
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
@@ -63,8 +58,7 @@ class DetailsActivity : AppCompatActivity() {
 
 
         val resultBundle = Bundle()
-        val res: Result = args.result
-        resultBundle.putParcelable("recipeBundle", res)
+        resultBundle.putParcelable("recipeBundle", args.result)
 
         val pagerAdapter = PagerAdapter(
             resultBundle,

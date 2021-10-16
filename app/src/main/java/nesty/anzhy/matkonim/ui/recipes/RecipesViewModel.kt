@@ -28,6 +28,7 @@ class RecipesViewModel @Inject constructor(
     application: Application,
     private val dataStoreRepository: DataStoreRepository
 ) : AndroidViewModel(application) {
+
     private lateinit var mealAndDiet: MealAndDietType
 
     var networkStatus = false
@@ -48,7 +49,6 @@ class RecipesViewModel @Inject constructor(
             }
         }
 
-    //save meal and diet type temporary
     fun saveMealAndDietTypeTemp(
         mealType: String,
         mealTypeId: Int,
@@ -89,7 +89,6 @@ class RecipesViewModel @Inject constructor(
 
     fun applySearchQuery(searchQuery: String): HashMap<String, String> {
         val queries: HashMap<String, String> = HashMap()
-
         queries[QUERY_SEARCH] = searchQuery
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[QUERY_API_KEY] = API_KEY

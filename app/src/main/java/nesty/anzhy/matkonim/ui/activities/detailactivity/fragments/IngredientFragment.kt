@@ -38,6 +38,10 @@ class IngredientFragment : Fragment() {
     private fun setupRecyclerView(){
         binding.recyclerViewIngredients.adapter = mAdapter
         binding.recyclerViewIngredients.layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewIngredients.setHasFixedSize(true)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

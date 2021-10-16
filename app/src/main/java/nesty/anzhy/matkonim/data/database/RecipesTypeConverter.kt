@@ -19,7 +19,7 @@ class RecipesTypeConverter {
     }
 
 
-    //we need 2 functions. to convert recipe to string and string to recipe(result)..
+    // convert recipe to string and string to recipe(result)..
 
     @TypeConverter
     fun resultToString(result: Result):String{

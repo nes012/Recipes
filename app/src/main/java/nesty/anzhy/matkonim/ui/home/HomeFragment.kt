@@ -18,8 +18,11 @@ import nesty.anzhy.matkonim.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
+    private val mainViewModel : MainViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
 
+    // This property is only valid between onCreateView and
+    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -27,15 +30,53 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        getUser()
+        registerObserver()
+        listenToChannels()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
+    private fun getUser() {
+        mainViewModel.getCurrentUser()
+    }
+    private fun listenToChannels() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainViewModel.allEventsFlow.collect { event ->
+                when(event){
+                    is MainViewModel.AllEvents.Message ->{
+                        Toast.makeText(requireContext(),
+                            event.message,
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+    private fun registerObserver() {
+        mainViewModel.currentUser.observe(viewLifecycleOwner,{ user ->
+            user?.let {
+                binding?.apply{
+                    welcomeTxt.text = "welcome ${it.email}"
+                    signinButton.text = "sign out"
+                    signinButton.setOnClickListener {
+                        mainViewModel.signOut()
+                    }
+                }
+            }?: binding?.apply {
+                welcomeTxt.isVisible = false
+                signinButton.text = "sign in"
+                signinButton.setOnClickListener {
+                    findNavController().navigate(R.id.action_navigation_home_to_signInFragment)
+                }
+            }
+        })
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 }
+
