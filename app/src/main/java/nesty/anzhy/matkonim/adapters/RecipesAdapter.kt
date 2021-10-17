@@ -2,11 +2,13 @@ package nesty.anzhy.matkonim.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nesty.anzhy.matkonim.databinding.RecipesItemLayoutBinding
 import nesty.anzhy.matkonim.models.FoodRecipe
 import nesty.anzhy.matkonim.models.Result
+import nesty.anzhy.matkonim.ui.recipes.RecipesFragmentDirections
 import nesty.anzhy.matkonim.util.RecipesDiffUtil
 
 class RecipesAdapter:RecyclerView.Adapter<RecipesAdapter.VH>() {
@@ -37,6 +39,13 @@ class RecipesAdapter:RecyclerView.Adapter<RecipesAdapter.VH>() {
     override fun onBindViewHolder(holder: VH, position: Int) {
         val currentRecipe = recipes[position]
         holder.bind(currentRecipe)
+        holder.itemView.setOnClickListener{
+            val action =
+                RecipesFragmentDirections.actionNavigationRecipesToDetailsActivity(
+                    currentRecipe
+                )
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,9 +18,12 @@ import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.PagerAdapter
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
+import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
@@ -30,7 +34,6 @@ class DetailsActivity : AppCompatActivity() {
 
     private var recipeSaved = false
     private var savedRecipeId = 0
-
 
     private lateinit var menuItem: MenuItem
 

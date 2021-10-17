@@ -48,6 +48,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         // Inflate the layout for this fragment
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
+
         binding.mainViewModel = mainViewModel
 
         setHasOptionsMenu(true)

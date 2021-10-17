@@ -14,7 +14,8 @@ data class Result(
     @SerializedName("cheap")
     val cheap: Boolean,
 
-    val cuisines: List<String>,
+    //val cuisines: List<String>,
+
     @SerializedName("dairyFree")
     val dairyFree: Boolean,
 

@@ -1,5 +1,6 @@
 package nesty.anzhy.matkonim.bindingadapters
 
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -9,30 +10,30 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import coil.load
+import kotlinx.parcelize.Parcelize
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.recipes.RecipesFragmentDirections
 import org.jsoup.Jsoup
-import java.lang.Exception
 
 class RecipesItemBinding {
-    companion object{
+    companion object {
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
-        fun loadImageFromUrl(imageView: ImageView, imageUrl:String){
-            imageView.load(imageUrl){
+        fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
+            imageView.load(imageUrl) {
                 crossfade(600)
-                    //if we haven't internet connection this photo will upload with out cache information
+                //if we haven't internet connection this photo will upload with out cache information
                 error(R.drawable.error_loading)
             }
         }
 
         @BindingAdapter("applyVeganColor")
         @JvmStatic
-        fun applyVeganColor(view: View, vegan: Boolean){
-            if(vegan){
-                when(view){
-                    is TextView ->{
+        fun applyVeganColor(view: View, vegan: Boolean) {
+            if (vegan) {
+                when (view) {
+                    is TextView -> {
                         view.setTextColor(
                             ContextCompat.getColor(
                                 view.context,
@@ -52,19 +53,18 @@ class RecipesItemBinding {
         }
 
 
-
         @BindingAdapter("onRecipeClickListener")
         @JvmStatic
-        fun onRecipeClickListener(recipeItemLayout: ConstraintLayout, result: Result){
-            Log.d("onRecipeClickListener", "CALLED")
-            recipeItemLayout.setOnClickListener{
-                try{
+        fun onRecipeClickListener(recipeItemLayout: ConstraintLayout, result: Result) {
+            recipeItemLayout.setOnClickListener {
+                try {
                     val action =
-                        RecipesFragmentDirections.actionNavigationRecipesToDetailsActivity(result)
+                        RecipesFragmentDirections.actionNavigationRecipesToDetailsActivity(
+                            result
+                        )
                     recipeItemLayout.findNavController().navigate(action)
-                }
-                catch (e: Exception){
-                    Log.d("onRecipeClickListener", e.toString())
+                } catch (e: Exception) {
+                    Log.e("onRecipeClickListener", e.toString())
                 }
             }
         }
@@ -73,8 +73,8 @@ class RecipesItemBinding {
         //we need to add nullable to second parameter string. cause it's sometimes can be nullable
         @BindingAdapter("parseHtml")
         @JvmStatic
-       fun parseHtml(textview: TextView, description: String?){
-            if(description!=null){
+        fun parseHtml(textview: TextView, description: String?) {
+            if (description != null) {
                 //with this line of code we have parse our html text
                 val desc = Jsoup.parse(description).text()
                 textview.text = desc
