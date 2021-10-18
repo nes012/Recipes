@@ -8,11 +8,24 @@
     android:background="@drawable/splash"
     tools:context=".ui.home.HomeFragment">
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_button"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/hello"
+        tools:layout_editor_absoluteX="0dp" />
+
     <TextView
         android:id="@+id/welcome_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="85dp"
         android:fontFamily="sans-serif-medium"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -26,12 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="70dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="216dp"
         android:text="sign in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/welcome_txt"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_txt"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

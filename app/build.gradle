@@ -120,6 +120,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
+    // Lottie animation
+    implementation "com.airbnb.android:lottie:4.2.0"
+
 }
 
 // ADD THIS AT THE BOTTOM
