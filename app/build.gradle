@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "nesty.anzhy.matkonim"
         minSdk 24
-        targetSdk 30
+        targetSdk 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -104,7 +104,6 @@ dependencies {
 
     // okHttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:25.11.0')

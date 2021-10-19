@@ -25,22 +25,16 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        //load image with coin library
-        holder.binding.ivIngredient.load(BASE_IMAGE_URL + ingredientList[position].image){
+        holder.binding.ivIngredient.load(BASE_IMAGE_URL + ingredientList[position].image) {
             crossfade(600)
             error(R.drawable.error_loading)
         }
-
-        holder.binding.tvIngredientName.text = ingredientList[position].name.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
-        }
-        holder.binding.tvIngredientConsistency.text = ingredientList[position].consistency
-        holder.binding.ivIngredientOriginal.text = ingredientList[position].original
-        holder.binding.tvIngredientUnit.text = ingredientList[position].unit
+        holder.binding.tvIngredientName.text = ingredientList[position].name.toString()
+            .uppercase(Locale.getDefault())
         holder.binding.tvIngredientAmount.text = ingredientList[position].amount.toString()
-
+        holder.binding.tvIngredientUnit.text = ingredientList[position].unit
+        holder.binding.tvIngredientConsistency.text = ingredientList[position].consistency
+        holder.binding.tvIngredientOriginal.text = ingredientList[position].original
     }
 
     override fun getItemCount(): Int = ingredientList.size

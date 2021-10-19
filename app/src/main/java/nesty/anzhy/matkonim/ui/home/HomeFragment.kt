@@ -71,14 +71,14 @@ class HomeFragment : Fragment() {
     private fun registerObserver() {
         mainViewModel.currentUser.observe(viewLifecycleOwner, { user ->
             user?.let {
-                binding?.apply {
+                binding.apply {
                     welcomeTxt.text = "welcome ${it.email}"
                     signinButton.text = "sign out"
                     signinButton.setOnClickListener {
                         mainViewModel.signOut()
                     }
                 }
-            } ?: binding?.apply {
+            } ?: binding.apply {
                 welcomeTxt.isVisible = false
                 signinButton.text = "sign in"
                 signinButton.setOnClickListener {
@@ -86,6 +86,11 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        _binding = null
     }
 
     override fun onDestroy() {
