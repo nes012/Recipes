@@ -80,7 +80,7 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.delete_all_favorite_recipes_menu){
             mainViewModel.deleteAllFavoriteRecipes()
-            showToast("All ercipes removed")
+            showToast("All recipes removed")
         }
         return super.onOptionsItemSelected(item)
     }
