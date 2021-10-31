@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim
+package nesty.anzhy.matkonim.unit
 
 import org.junit.Test
 
