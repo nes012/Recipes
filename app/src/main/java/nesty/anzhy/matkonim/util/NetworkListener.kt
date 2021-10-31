@@ -31,6 +31,7 @@ class NetworkListener: ConnectivityManager.NetworkCallback() {
         var isConnected = false
 
         connectivityManager.allNetworks.forEach{ network->
+
             //we're going to check each network there is and check if we are online or not
             val networkCapability = connectivityManager.getNetworkCapabilities(network)
             networkCapability?.let {

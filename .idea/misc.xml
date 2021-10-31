@@ -28,8 +28,8 @@
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_reset_password.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/ingredients_item_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/placeholder_layout.xml" value="0.21467391304347827" />
         <entry key="app/src/main/res/layout/recipes_bottom_sheet.xml" value="0.19384057971014493" />
