@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.databinding.FragmentHomeBinding
 

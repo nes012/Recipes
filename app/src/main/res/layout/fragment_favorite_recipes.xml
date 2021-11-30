@@ -6,7 +6,7 @@
     <data>
         <variable
             name="mainViewModel"
-            type="nesty.anzhy.matkonim.MainViewModel" />
+            type="nesty.anzhy.matkonim.viewmodel.MainViewModel" />
 
         <variable
             name="mAdapter"

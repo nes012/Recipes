@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.databinding.FavoriteRecipesItemLayoutBinding

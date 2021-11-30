@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import nesty.anzhy.matkonim.databinding.RecipesBottomSheetBinding
-import nesty.anzhy.matkonim.ui.recipes.RecipesViewModel
+import nesty.anzhy.matkonim.viewmodel.RecipesViewModel
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_DIET_TYPE
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import java.util.*

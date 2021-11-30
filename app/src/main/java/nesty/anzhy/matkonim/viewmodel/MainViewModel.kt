@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim
+package nesty.anzhy.matkonim.viewmodel
 
 
 import android.app.Application
@@ -148,7 +148,7 @@ class MainViewModel @Inject constructor(
 
     sealed class AllEvents {
         data class Message(val message : String) : AllEvents()
-        data class ErrorCode(val code : Int):AllEvents()
+        data class ErrorCode(val code : Int): AllEvents()
         data class Error(val error : String) : AllEvents()
     }
 

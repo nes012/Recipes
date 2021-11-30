@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.FavoriteRecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentFavoriteRecipesBinding

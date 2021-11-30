@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.MainViewModel
+import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkListener
 import nesty.anzhy.matkonim.util.NetworkResult
 import nesty.anzhy.matkonim.util.observeOnce
+import nesty.anzhy.matkonim.viewmodel.RecipesViewModel
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
