@@ -62,5 +62,6 @@
             app:layout_constraintEnd_toEndOf="@+id/ivNoData"
             app:layout_constraintStart_toStartOf="@+id/ivNoData"
             app:layout_constraintTop_toBottomOf="@+id/ivNoData" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
