@@ -18,7 +18,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.favoriterecipes.FavoriteRecipesFragment">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavoriteRecipes"
             setData="@{mAdapter}"
