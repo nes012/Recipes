@@ -1,6 +1,5 @@
 package nesty.anzhy.matkonim.viewmodel
 
-
 import android.app.Application
 import android.content.ContentValues.TAG
 import android.content.Context

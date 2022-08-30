@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
@@ -32,7 +31,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         getUser()
         registerObserver()
         listenToChannels()
@@ -63,13 +62,14 @@ class HomeFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+                    else -> {}
                 }
             }
         }
     }
 
     private fun registerObserver() {
-        mainViewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        mainViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 binding.apply {
                     welcomeTxt.text = "welcome ${it.email}"
@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_navigation_home_to_signInFragment)
                 }
             }
-        })
+        }
     }
 
     override fun onPause() {

@@ -31,8 +31,7 @@ class FavoriteRecipesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mainViewModel =  ViewModelProvider(requireActivity())
-            .get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this

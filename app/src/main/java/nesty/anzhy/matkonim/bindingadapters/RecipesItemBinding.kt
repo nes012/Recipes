@@ -1,6 +1,5 @@
 package nesty.anzhy.matkonim.bindingadapters
 
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import coil.load
-import kotlinx.parcelize.Parcelize
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.models.Result
 import nesty.anzhy.matkonim.ui.recipes.RecipesFragmentDirections

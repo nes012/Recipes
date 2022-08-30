@@ -89,9 +89,6 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                             }
                     }
 
-                    else ->{
-                        Log.d(TAG, "listenToChannels: No event received so far")
-                    }
                 }
 
             }
