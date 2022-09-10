@@ -152,7 +152,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeItemMenuColor(item: MenuItem, color: Int) {
-        item.icon.setTint(ContextCompat.getColor(this, color))
+        item.icon!!.setTint(ContextCompat.getColor(this, color))
     }
 
     override fun onDestroy() {

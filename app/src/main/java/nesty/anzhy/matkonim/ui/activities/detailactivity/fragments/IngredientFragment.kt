@@ -22,7 +22,7 @@ class IngredientFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentIngredientBinding.inflate(inflater, container, false)
 
         val args = arguments
