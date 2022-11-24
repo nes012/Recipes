@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -16,6 +17,7 @@ import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.FavoriteRecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentFavoriteRecipesBinding
+import nesty.anzhy.matkonim.util.bindMenu
 
 @AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
@@ -70,21 +72,16 @@ class FavoriteRecipesFragment : Fragment() {
     }
 
     private fun setMenu() {
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.favorite_recipes_menu, menu)
+        val menuHost: MenuHost = requireActivity()
+        val provider = requireActivity().bindMenu(
+            menuHost = menuHost,
+            menuRes = R.menu.favorite_recipes_menu,
+            lifecycleOwner = viewLifecycleOwner) { menuItem ->
+            if (menuItem.itemId == R.id.delete_all_favorite_recipes_menu) {
+                mainViewModel.deleteAllFavoriteRecipes()
+                showToast("All recipes removed")
             }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.delete_all_favorite_recipes_menu) {
-                    mainViewModel.deleteAllFavoriteRecipes()
-                    showToast("All recipes removed")
-                    Log.e("onMenuItemSelected", "FavRemove")
-                }
-                return true
-            }
-
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
     }
 
     override fun onDestroyView() {

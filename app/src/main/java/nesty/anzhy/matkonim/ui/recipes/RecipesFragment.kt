@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -14,15 +15,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkListener
 import nesty.anzhy.matkonim.util.NetworkResult
+import nesty.anzhy.matkonim.util.bindMenu
 import nesty.anzhy.matkonim.util.observeOnce
 import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.viewmodel.RecipesViewModel
+
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private val args by navArgs<RecipesFragmentArgs>()
@@ -197,15 +203,11 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.menu_search) {
-                    Log.e("onMenuItemSelected", "RecipesFragment")
-                }
                 return true
             }
 
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

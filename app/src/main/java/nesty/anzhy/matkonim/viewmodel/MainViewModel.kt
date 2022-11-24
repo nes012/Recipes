@@ -177,9 +177,6 @@ class MainViewModel @Inject constructor(
             repository.local.deleteAllFavoriteRecipes()
         }
 
-
-
-
     /**RETROFIT */
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     var searchRecipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
