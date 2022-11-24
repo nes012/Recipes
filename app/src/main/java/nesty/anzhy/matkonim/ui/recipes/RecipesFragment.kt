@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,7 +23,6 @@ import nesty.anzhy.matkonim.util.NetworkResult
 import nesty.anzhy.matkonim.util.observeOnce
 import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.viewmodel.RecipesViewModel
-
 @AndroidEntryPoint
 class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private val args by navArgs<RecipesFragmentArgs>()
@@ -50,7 +51,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
 
-        setHasOptionsMenu(true)
+        setMenu()
 
         setupRecyclerView()
 
@@ -84,22 +85,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.recyclerViewRecipes.adapter = mAdapter
         binding.recyclerViewRecipes.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipes_menu, menu)
-
-        val search = menu.findItem(R.id.menu_search)
-        val searchView = search.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_search){
-            Log.e("onOptionsItemSelected", "AAA")
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -199,6 +184,26 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.shimmerFrameLayout.stopShimmer()
         binding.shimmerFrameLayout.visibility = View.GONE
         binding.recyclerViewRecipes.visibility = View.VISIBLE
+    }
+
+    private fun setMenu() {
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipes_menu, menu)
+                val search = menu.findItem(R.id.menu_search)
+                val searchView = search.actionView as? SearchView
+                searchView?.isSubmitButtonEnabled = true
+                searchView?.setOnQueryTextListener(this@RecipesFragment)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.menu_search) {
+                    Log.e("onMenuItemSelected", "RecipesFragment")
+                }
+                return true
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {
