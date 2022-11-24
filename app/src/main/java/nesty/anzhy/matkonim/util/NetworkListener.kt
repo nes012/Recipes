@@ -10,7 +10,6 @@ class NetworkListener : ConnectivityManager.NetworkCallback() {
     //we need to override here 2 methods. onAvailable/onLost
     //default value will be false, but it doesn't even matter
     private val isNetworkAvailable = MutableStateFlow(false)
-
     override fun onAvailable(network: Network) {
         isNetworkAvailable.value = true
     }

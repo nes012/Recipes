@@ -12,15 +12,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.RecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentRecipesBinding
 import nesty.anzhy.matkonim.util.NetworkListener
 import nesty.anzhy.matkonim.util.NetworkResult
 import nesty.anzhy.matkonim.util.observeOnce
+import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.viewmodel.RecipesViewModel
 
 @AndroidEntryPoint
@@ -38,8 +37,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        recipesViewModel = ViewModelProvider(requireActivity())[RecipesViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -49,16 +48,15 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         // Inflate the layout for this fragment
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-
         binding.mainViewModel = mainViewModel
 
         setHasOptionsMenu(true)
 
         setupRecyclerView()
 
-        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner) {
             recipesViewModel.backOnline = it
-        })
+        }
 
         lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
@@ -97,8 +95,15 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView?.setOnQueryTextListener(this)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_search){
+            Log.e("onOptionsItemSelected", "AAA")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
+        if (query != null) {
             searchApiData(query)
         }
         return true
@@ -110,7 +115,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("RecipesFragment", "readDatabase called!")
                     mAdapter.setData(database.first().foodRecipe)
@@ -118,14 +123,14 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 } else {
                     requestApiData()
                 }
-            })
+            }
         }
     }
 
     private fun requestApiData() {
         Log.d("RecipesFragment", "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -145,13 +150,13 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     showShimmerEffect()
                 }
             }
-        })
+        }
     }
 
     private fun searchApiData(searchQuery: String) {
         showShimmerEffect()
         mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
-        mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.searchRecipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -171,16 +176,16 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     showShimmerEffect()
                 }
             }
-        })
+        }
     }
 
     private fun loadDataFromCache() {
-        lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+        val launch = lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
                     mAdapter.setData(database.first().foodRecipe)
                 }
-            })
+            }
         }
     }
 

@@ -29,7 +29,7 @@ class IngredientsAdapter: RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>(
             crossfade(600)
             error(R.drawable.error_loading)
         }
-        holder.binding.tvIngredientName.text = ingredientList[position].name.toString()
+        holder.binding.tvIngredientName.text = ingredientList[position].name
             .uppercase(Locale.getDefault())
         holder.binding.tvIngredientAmount.text = ingredientList[position].amount.toString()
         holder.binding.tvIngredientUnit.text = ingredientList[position].unit

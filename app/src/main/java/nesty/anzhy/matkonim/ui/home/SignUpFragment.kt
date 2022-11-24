@@ -1,7 +1,6 @@
 package nesty.anzhy.matkonim.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import kotlinx.coroutines.flow.collect
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -60,11 +58,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
 
     private fun registerObservers() {
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
             }
-        })
+        }
     }
 
     private fun listenToChannels() {

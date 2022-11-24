@@ -55,11 +55,11 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun registerObservers() {
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
             }
-        })
+        }
     }
     private fun listenToChannels() {
         viewLifecycleOwner.lifecycleScope.launch {

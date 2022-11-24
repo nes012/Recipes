@@ -3,7 +3,7 @@ package nesty.anzhy.matkonim.util
 class Constants {
 
     companion object{
-        const val API_KEY = "32c27d995c3f4bfd819eaeab50fce371"
+        const val API_KEY = "7f4aa7c678274ba18f27dc81ccbf0ad8"
         //constant for ingredient image
         const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
 

@@ -20,7 +20,6 @@ import nesty.anzhy.matkonim.databinding.ActivityDetailsBinding
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.IngredientFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.InstructionsFragment
 import nesty.anzhy.matkonim.ui.activities.detailactivity.fragments.OverviewFragment
-import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -45,7 +44,6 @@ class DetailsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolBar)
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val fragments = ArrayList<Fragment>()
         fragments.add(OverviewFragment())
@@ -86,7 +84,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun checkSavedRecipes(menuItem: MenuItem) {
-        mainViewModel.readFavoriteRecipes.observe(this, { favoritesEntity ->
+        mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
             try {
                 for (savedRecipe in favoritesEntity) {
                     if (savedRecipe.result.recipeId == args.result.recipeId) {
@@ -98,7 +96,7 @@ class DetailsActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.d("DetailsActivity", e.message.toString())
             }
-        })
+        }
     }
 
 

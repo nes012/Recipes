@@ -151,8 +151,6 @@ class MainViewModel @Inject constructor(
         data class Error(val error : String) : AllEvents()
     }
 
-
-
     /**ROOM DB */
     val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
     val readFavoriteRecipes: LiveData<List<FavoritesEntity>> =
