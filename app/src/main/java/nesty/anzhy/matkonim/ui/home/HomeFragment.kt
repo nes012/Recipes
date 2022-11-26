@@ -1,6 +1,5 @@
 package nesty.anzhy.matkonim.ui.home
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +34,6 @@ class HomeFragment : Fragment() {
         registerObserver()
         listenToChannels()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
 
 // Declaring the animation view
         val animationView: LottieAnimationView = binding.animationView
