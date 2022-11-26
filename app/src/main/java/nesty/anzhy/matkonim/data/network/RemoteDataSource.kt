@@ -4,15 +4,15 @@ import nesty.anzhy.matkonim.models.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+open class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi
-) {
+) : RemoteDataSourceInterface {
 
-    suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe>{
+    override suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe>{
         return foodRecipesApi.getRecipes(queries)
     }
 
-    suspend fun searchRecipes(searchQueryMap: Map<String, String>): Response<FoodRecipe>{
+    override suspend fun searchRecipes(searchQueryMap: Map<String, String>): Response<FoodRecipe>{
         return foodRecipesApi.searchRecipes(searchQueryMap)
     }
 }

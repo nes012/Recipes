@@ -4,7 +4,6 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
-
 @Dao
 interface RecipesDao {
 

@@ -7,28 +7,28 @@ import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao
-) {
-    fun readRecipes(): Flow<List<RecipesEntity>> {
+): LocalDataSourceInterface  {
+    override fun readRecipes(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
     }
 
-    fun readFavoriteRecipes(): Flow<List<FavoritesEntity>>{
+    override fun readFavoriteRecipes(): Flow<List<FavoritesEntity>>{
         return recipesDao.readFavoriteRecipes()
     }
 
-    suspend fun insertRecipes(recipesEntity: RecipesEntity) {
+     override suspend fun insertRecipes(recipesEntity: RecipesEntity) {
         recipesDao.insertRecipes(recipesEntity)
     }
 
-    suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) {
+    override suspend fun insertFavoriteRecipes(favoritesEntity: FavoritesEntity) {
         recipesDao.insertFavoriteRecipe(favoritesEntity)
     }
 
-    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) {
+    override suspend fun deleteFavoriteRecipe(favoritesEntity: FavoritesEntity) {
         recipesDao.deleteFavoriteRecipe(favoritesEntity)
     }
 
-    suspend fun deleteAllFavoriteRecipes(){
+    override suspend fun deleteAllFavoriteRecipes(){
         recipesDao.deleteAllFavoriteRecipes()
     }
 }

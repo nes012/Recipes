@@ -18,7 +18,6 @@ class RecipesTypeConverter {
         return gson.fromJson(data, listType)
     }
 
-
     // convert recipe to string and string to recipe(result)..
 
     @TypeConverter

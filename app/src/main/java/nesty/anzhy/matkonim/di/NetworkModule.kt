@@ -4,11 +4,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import nesty.anzhy.matkonim.data.database.LocalDataSource
+import nesty.anzhy.matkonim.data.database.LocalDataSourceInterface
+import nesty.anzhy.matkonim.data.database.RecipesDao
 import nesty.anzhy.matkonim.data.firebase.AuthRepository
 import nesty.anzhy.matkonim.data.firebase.BaseAuthRepository
 import nesty.anzhy.matkonim.data.firebase.BaseAuthenticator
 import nesty.anzhy.matkonim.data.firebase.FirebaseAuthenticator
 import nesty.anzhy.matkonim.data.network.FoodRecipesApi
+import nesty.anzhy.matkonim.data.network.RemoteDataSource
+import nesty.anzhy.matkonim.data.network.RemoteDataSourceInterface
 
 import nesty.anzhy.matkonim.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
@@ -70,5 +75,22 @@ object NetworkModule {
     @Provides
     fun provideRepository() : BaseAuthRepository {
         return AuthRepository(provideAuthenticator())
+    }
+
+    @Singleton
+    @Provides
+    fun provideRemoteDataSource(
+        foodRecipesApi: FoodRecipesApi
+    ) :  RemoteDataSourceInterface {
+        return RemoteDataSource(foodRecipesApi)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideLocalDataSourceInterface(
+        recipesDao: RecipesDao
+    ): LocalDataSourceInterface {
+        return LocalDataSource(recipesDao)
     }
 }

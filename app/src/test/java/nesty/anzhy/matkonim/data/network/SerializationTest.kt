@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.network;
+package nesty.anzhy.matkonim.data.network;
 
 import kotlinx.coroutines.runBlocking
 import nesty.anzhy.matkonim.data.network.FoodRecipesApi
