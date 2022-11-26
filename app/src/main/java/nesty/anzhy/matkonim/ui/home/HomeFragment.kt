@@ -70,15 +70,15 @@ class HomeFragment : Fragment() {
             user?.let {
                 binding.apply {
                     welcomeTxt.text = "welcome ${it.email}"
-                    signinButton.text = "sign out"
-                    signinButton.setOnClickListener {
+                    btnSignIn.text = "sign out"
+                    btnSignIn.setOnClickListener {
                         mainViewModel.signOut()
                     }
                 }
             } ?: binding.apply {
                 welcomeTxt.isVisible = false
-                signinButton.text = "sign in"
-                signinButton.setOnClickListener {
+                btnSignIn.text = "sign in"
+                btnSignIn.setOnClickListener {
                     findNavController().navigate(R.id.action_navigation_home_to_signInFragment)
                 }
             }

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signin_button"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/hello"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/signin_button"
+        android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="70dp"

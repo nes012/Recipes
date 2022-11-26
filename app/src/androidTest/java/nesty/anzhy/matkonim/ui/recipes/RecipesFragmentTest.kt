@@ -47,4 +47,24 @@ class RecipesFragmentTest {
         Mockito.verify(navController).navigate(R.id.action_navigation_recipes_to_recipesBottomSheet)
     }
 
+ /*   @Test
+    fun testSearchField(){
+        val navController = Mockito.mock(NavController::class.java)
+        val fragmentArgs = bundleOf("backFromBottomSheet" to false)
+
+        launchFragmentInHiltContainer<RecipesFragment>(
+            factory = FragmentFactory(),
+            fragmentArgs = fragmentArgs
+        ) {
+            Navigation.setViewNavController(
+                view = requireView(),
+                controller = navController
+            )
+        }
+        Espresso.onView(ViewMatchers.withId(R.id.menu_search)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.search_src_text))
+            .perform(ViewActions.typeText("Chocolate cake"))
+            .perform(pressKey(KeyEvent.KEYCODE_ENTER))
+    }*/
+
 }
