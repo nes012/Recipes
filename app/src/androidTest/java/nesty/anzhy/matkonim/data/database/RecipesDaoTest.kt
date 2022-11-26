@@ -1,6 +1,7 @@
 package nesty.anzhy.matkonim.data.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.asLiveData
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -8,12 +9,15 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import nesty.anzhy.matkonim.data.database.entities.FavoritesEntity
 import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
 import nesty.anzhy.matkonim.models.FoodRecipe
+import nesty.anzhy.matkonim.util.getOrAwaitValue
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -42,32 +46,29 @@ class RecipesDaoTest {
 
     @Test
     fun insertRecipeTesting() = runTest {
-        val recipeResult = nesty.anzhy.matkonim.models.Result(
-            aggregateLikes = 2,
-            cheap = false,
-            dairyFree = false,
-            extendedIngredients = emptyList(),
-            glutenFree = true,
-            recipeId = 123,
-            image = "",
-            readyInMinutes = 2,
-            sourceUrl = "",
-            sourceName = "",
-            title = "Chocolate",
-            vegan = false,
-            summary = "",
-            vegetarian = false,
-            veryHealthy = true
-        )
         val exampleRecipe = RecipesEntity(
             FoodRecipe(
-                arrayListOf(recipeResult)
+                arrayListOf(MockData.recipeResult)
             )
         )
         dao.insertRecipes(exampleRecipe)
 
         val recipeList = dao.readRecipes().first().first()
         assertThat(recipeList.foodRecipe.results[0].title).isEqualTo("Chocolate")
+    }
+
+    @Test
+    fun onRemoveAllRecipesDBisEmpty() = runTest {
+        val favoritesEntity = FavoritesEntity(
+            id = 0,
+            MockData.recipeResult
+        )
+        dao.insertFavoriteRecipe(
+            favoritesEntity
+        )
+        dao.deleteAllFavoriteRecipes()
+        val data = dao.readFavoriteRecipes().asLiveData().getOrAwaitValue()
+        assertThat(data).isEmpty()
     }
 
 

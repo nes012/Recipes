@@ -9,7 +9,7 @@ import nesty.anzhy.matkonim.data.database.entities.RecipesEntity
 @Database
     (
     entities = [RecipesEntity::class, FavoritesEntity::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 
