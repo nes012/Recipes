@@ -1,8 +1,6 @@
 package nesty.anzhy.matkonim.data.network;
 
 import kotlinx.coroutines.runBlocking
-import nesty.anzhy.matkonim.data.network.FoodRecipesApi
-import nesty.anzhy.matkonim.data.network.RemoteDataSource
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -14,8 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
-
-
 class SerializationTest {
     private val mockWebServer = MockWebServer()
 
