@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "nesty.anzhy.matkonim"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -50,27 +50,30 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    // Fix Duplicate class
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
     // Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.test.ext:junit-ktx:1.1.4'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
 
     //Room
-    def room_version = "2.4.3"
+    def room_version = "2.5.2"
     implementation "androidx.room:room-common:$room_version"
     implementation("androidx.room:room-runtime:$room_version")
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
     // Material Components
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -83,6 +86,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.42"
     kapt "com.google.dagger:hilt-android-compiler:2.43.2"
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
     // for compatibility with hilt-dagger
     implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0"
 
@@ -97,7 +101,7 @@ dependencies {
     implementation "io.coil-kt:coil:2.0.0"
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
@@ -106,20 +110,20 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.14.1'
 
     // okHttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:25.11.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 
     // Lottie animation
     implementation "com.airbnb.android:lottie:4.2.0"
@@ -127,14 +131,14 @@ dependencies {
     // Test libraries
     implementation "androidx.test:core:1.5.0"
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.43.2'
-    debugImplementation "androidx.fragment:fragment-testing:1.6.0-alpha03"
+    debugImplementation "androidx.fragment:fragment-testing:1.7.0-alpha01"
     // Android Test Implementations (instrumental tests that requires UI)
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation "junit:junit:4.13.2"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation "org.mockito:mockito-android:4.7.0"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
     androidTestImplementation "com.google.truth:truth:1.1.3"
     androidTestImplementation "org.mockito:mockito-core:4.7.0"
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.43.2'
@@ -142,7 +146,7 @@ dependencies {
     // TestImplementations
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.hamcrest:hamcrest-all:1.3"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
     // framework that allows you to write unit tests and run them on a desktop JVM while still using Android API
     testImplementation "org.robolectric:robolectric:4.8.1"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
