@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import nesty.anzhy.matkonim.data.DataStoreRepository
-import nesty.anzhy.matkonim.data.MealAndDietType
+import nesty.anzhy.matkonim.data.preferences.DataStoreRepository
+import nesty.anzhy.matkonim.data.preferences.MealAndDietType
 import nesty.anzhy.matkonim.util.Constants.Companion.API_KEY
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_DIET_TYPE
 import nesty.anzhy.matkonim.util.Constants.Companion.DEFAULT_MEAL_TYPE

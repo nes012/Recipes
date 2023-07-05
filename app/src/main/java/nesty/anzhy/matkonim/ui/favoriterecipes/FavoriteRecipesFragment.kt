@@ -1,10 +1,16 @@
 package nesty.anzhy.matkonim.ui.favoriterecipes
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +18,7 @@ import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.adapters.FavoriteRecipesAdapter
 import nesty.anzhy.matkonim.databinding.FragmentFavoriteRecipesBinding
+import nesty.anzhy.matkonim.util.bindMenu
 
 @AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
@@ -24,8 +31,14 @@ class FavoriteRecipesFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter(requireActivity(), mainViewModel) }
+    private val mAdapter: FavoriteRecipesAdapter by lazy {
+        FavoriteRecipesAdapter(
+            requireActivity(),
+            mainViewModel
+        )
+    }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +52,7 @@ class FavoriteRecipesFragment : Fragment() {
         binding.mainViewModel = mainViewModel
 
         //show favorite_recipes_menu layout as our menu in this fragment
-        setHasOptionsMenu(true)
+        setMenu()
 
         //we don't need this code because we added FavoriteRecipesBinding to layout.
         //mainViewModel and adapter inside layout.
@@ -59,6 +72,19 @@ class FavoriteRecipesFragment : Fragment() {
         return binding.root
     }
 
+    private fun setMenu() {
+        val menuHost: MenuHost = requireActivity()
+        val provider = requireActivity().bindMenu(
+            menuHost = menuHost,
+            menuRes = R.menu.favorite_recipes_menu,
+            lifecycleOwner = viewLifecycleOwner) { menuItem ->
+            if (menuItem.itemId == R.id.delete_all_favorite_recipes_menu) {
+                mainViewModel.deleteAllFavoriteRecipes()
+                showToast("All recipes removed")
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -72,19 +98,8 @@ class FavoriteRecipesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.favorite_recipes_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.delete_all_favorite_recipes_menu){
-            mainViewModel.deleteAllFavoriteRecipes()
-            showToast("All recipes removed")
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun showToast(message: String){
+    private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
 }

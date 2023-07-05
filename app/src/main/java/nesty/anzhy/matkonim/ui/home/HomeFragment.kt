@@ -1,6 +1,5 @@
 package nesty.anzhy.matkonim.ui.home
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +34,6 @@ class HomeFragment : Fragment() {
         registerObserver()
         listenToChannels()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
 
 // Declaring the animation view
         val animationView: LottieAnimationView = binding.animationView
@@ -72,15 +70,15 @@ class HomeFragment : Fragment() {
             user?.let {
                 binding.apply {
                     welcomeTxt.text = "welcome ${it.email}"
-                    signinButton.text = "sign out"
-                    signinButton.setOnClickListener {
+                    btnSignIn.text = "sign out"
+                    btnSignIn.setOnClickListener {
                         mainViewModel.signOut()
                     }
                 }
             } ?: binding.apply {
                 welcomeTxt.isVisible = false
-                signinButton.text = "sign in"
-                signinButton.setOnClickListener {
+                btnSignIn.text = "sign in"
+                btnSignIn.setOnClickListener {
                     findNavController().navigate(R.id.action_navigation_home_to_signInFragment)
                 }
             }

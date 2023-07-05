@@ -1,4 +1,4 @@
-package nesty.anzhy.matkonim.data
+package nesty.anzhy.matkonim.data.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore

@@ -45,7 +45,6 @@ class DetailsActivity : AppCompatActivity() {
         binding.toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         val fragments = ArrayList<Fragment>()
         fragments.add(OverviewFragment())
         fragments.add(IngredientFragment())
