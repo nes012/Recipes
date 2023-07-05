@@ -17,7 +17,6 @@ import nesty.anzhy.matkonim.viewmodel.MainViewModel
 import nesty.anzhy.matkonim.R
 import nesty.anzhy.matkonim.databinding.FragmentHomeBinding
 
-
 class HomeFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()

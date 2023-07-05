@@ -1,7 +1,6 @@
 package nesty.anzhy.matkonim.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import kotlinx.coroutines.flow.collect
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -22,9 +20,9 @@ import nesty.anzhy.matkonim.databinding.FragmentSignInBinding
 @AndroidEntryPoint
 class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
 
-    private val viewModel : MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
-    private var _binding : FragmentSignInBinding? = null
+    private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding
     private val TAG = "SignInFragment"
 
@@ -33,7 +31,7 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSignInBinding.inflate(inflater , container , false)
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         listenToChannels()
         registerObservers()
         binding?.apply {
@@ -55,19 +53,20 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun registerObservers() {
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
             }
-        })
+        }
     }
+
     private fun listenToChannels() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.allEventsFlow.collect { event ->
-                when(event){
+                when (event) {
                     is MainViewModel.AllEvents.Error -> {
                         binding?.apply {
-                            errorTxt.text =  event.error
+                            errorTxt.text = event.error
                             progressBarSignin.isInvisible = true
                         }
                     }
@@ -82,7 +81,7 @@ class SignInFragment() : Fragment(R.layout.fragment_sign_in) {
                             }
 
 
-                        if(event.code == 2)
+                        if (event.code == 2)
                             binding?.apply {
                                 userPasswordEtvl.error = "password should not be empty"
                                 progressBarSignin.isInvisible = true

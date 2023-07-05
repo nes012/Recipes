@@ -1,7 +1,6 @@
 package nesty.anzhy.matkonim.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import kotlinx.coroutines.flow.collect
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -22,9 +20,9 @@ import nesty.anzhy.matkonim.databinding.FragmentSignUpBinding
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
-    private val viewModel : MainViewModel by activityViewModels()
-    private var _binding : FragmentSignUpBinding? = null
-    private val binding get()  = _binding
+    private val viewModel: MainViewModel by activityViewModels()
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = _binding
     private val TAG = "SignUpFragment"
 
     override fun onCreateView(
@@ -32,7 +30,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSignUpBinding.inflate(inflater , container , false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
         registerObservers()
         listenToChannels()
@@ -42,7 +40,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 val email = userEmailEtv.text.toString()
                 val password = userPasswordEtv.text.toString()
                 val confirmPass = confirmPasswordEtv.text.toString()
-                viewModel.signUpUser(email , password , confirmPass)
+                viewModel.signUpUser(email, password, confirmPass)
             }
 
             signInTxt.setOnClickListener {
@@ -60,17 +58,17 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
 
     private fun registerObservers() {
-        viewModel.currentUser.observe(viewLifecycleOwner, { user ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
             user?.let {
                 findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
             }
-        })
+        }
     }
 
     private fun listenToChannels() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.allEventsFlow.collect { event ->
-                when(event){
+                when (event) {
                     is MainViewModel.AllEvents.Error -> {
                         binding?.apply {
                             errorTxt.text = event.error
@@ -88,19 +86,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                             }
 
 
-                        if(event.code == 2)
+                        if (event.code == 2)
                             binding?.apply {
                                 userPasswordEtvl.error = "password should not be empty"
                                 progressBarSignup.isInvisible = true
                             }
 
-                        if(event.code == 3)
+                        if (event.code == 3)
                             binding?.apply {
                                 confirmPasswordEtvl.error = "passwords do not match"
                                 progressBarSignup.isInvisible = true
                             }
                     }
-
                 }
 
             }

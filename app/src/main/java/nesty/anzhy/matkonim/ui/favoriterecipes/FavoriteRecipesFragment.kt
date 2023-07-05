@@ -30,7 +30,7 @@ class FavoriteRecipesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
 
