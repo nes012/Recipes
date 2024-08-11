@@ -2,15 +2,11 @@ package nesty.anzhy.matkonim.ui.favoriterecipes
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,10 +70,11 @@ class FavoriteRecipesFragment : Fragment() {
 
     private fun setMenu() {
         val menuHost: MenuHost = requireActivity()
-        val provider = requireActivity().bindMenu(
+        val provider = bindMenu(
             menuHost = menuHost,
             menuRes = R.menu.favorite_recipes_menu,
-            lifecycleOwner = viewLifecycleOwner) { menuItem ->
+            lifecycleOwner = viewLifecycleOwner
+        ) { menuItem ->
             if (menuItem.itemId == R.id.delete_all_favorite_recipes_menu) {
                 mainViewModel.deleteAllFavoriteRecipes()
                 showToast("All recipes removed")

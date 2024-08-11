@@ -236,7 +236,7 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API Key limited")
             }
-            response.body()!!.results.isNullOrEmpty() -> {
+            response.body()!!.results.isEmpty() -> {
                 return NetworkResult.Error("Recipes not found")
             }
             response.isSuccessful -> {
